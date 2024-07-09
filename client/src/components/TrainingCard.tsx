@@ -94,7 +94,8 @@ function TrainingCard(props: TrainingCardProps) {
     }
 
     function handleYes() {
-        if (attended || localStorage.getItem("id") === "host") {
+        if (attended || localStorage.getItem("id") === "host" ||
+            props.attendance.includes(localStorage.getItem("id")!)) {
             return;
         }
         props.attendance.push(localStorage.getItem("id")!)
