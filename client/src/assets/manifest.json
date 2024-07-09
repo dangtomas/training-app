@@ -1,5 +1,5 @@
 {
-    "name": "KohoutekAcademy",
+    "name": "training-app",
     "short_name": "Tréninky",
     "start_url": "/",
     "display": "standalone",
@@ -8,12 +8,12 @@
     "description": "badminton club login app",
     "icons": [
     {
-      "src": "./assets/logo192.png",
+      "src": "./logo192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-        "src": "./assets/logo512.png",
+        "src": "./logo512.png",
         "sizes": "512x512",
         "type": "image/png"
     }
