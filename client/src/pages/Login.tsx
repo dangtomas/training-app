@@ -15,7 +15,7 @@ function Login() {
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const response = await fetch("http://localhost:3000/auth/login", {
+            const response = await fetch("https://training-app-server-uh3u.onrender.com/auth/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -35,9 +35,7 @@ function Login() {
             localStorage.setItem("id", data.id);
 
             setMessage("Úspěšné přihlášení, počkej chvíli ✅🥳");
-            setTimeout(() => {
-                navigate("/");
-            }, 500)
+            navigate("/");
         } catch (err) {
             setMessage("Špatné údaje, zkus to znova ❌🙁");
         }

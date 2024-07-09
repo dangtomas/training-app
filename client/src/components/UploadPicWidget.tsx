@@ -9,7 +9,7 @@ function UploadPicWidget() {
     async function updateProfilePic(url: string) {
         try {
             await fetch(
-                `http://localhost:3000/api/users/${localStorage.getItem("id")}`, {
+                `https://training-app-server-uh3u.onrender.com/api/users/${localStorage.getItem("id")}`, {
                     method: "PATCH",
                     headers: {
                         "Authorization": `Bearer ${localStorage.getItem("token")}`,

@@ -31,12 +31,13 @@ function TrainingCard(props: TrainingCardProps) {
                     name: id.split("-", 2)[1],
                     username: id.split("-", 2)[1].replace(" ", "").toLowerCase(),
                     profilePicSrc: "https://res.cloudinary.com/dynjmtw8a/image/upload/v1720293279/ybsesmgjvxmvt4wmglvy.jpg",
-                    host: true
+                    host: true,
+                    _id: "host"
                 }
             }
 
             const response = await fetch(
-                `http://localhost:3000/api/users/${id}`, {
+                `https://training-app-server-uh3u.onrender.com/api/users/${id}`, {
                 method: "GET",
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
@@ -66,7 +67,7 @@ function TrainingCard(props: TrainingCardProps) {
 
     async function updateTraining(addingHost: boolean) {
         try {
-            const response = await fetch(`http://localhost:3000/api/trainings/${props._id}`,
+            const response = await fetch(`https://training-app-server-uh3u.onrender.com/api/trainings/${props._id}`,
                 {
                     method: "PATCH",
                     headers: {
@@ -111,7 +112,7 @@ function TrainingCard(props: TrainingCardProps) {
 
     async function handleDelete() {
         try {
-            const response = await fetch(`http://localhost:3000/api/trainings/${props._id}`,
+            const response = await fetch(`https://training-app-server-uh3u.onrender.com/api/trainings/${props._id}`,
                 {
                     method: "DELETE",
                     headers: {
