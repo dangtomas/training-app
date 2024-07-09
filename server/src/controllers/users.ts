@@ -3,7 +3,7 @@ import User from '../models/User';
 import { StatusCodes } from 'http-status-codes';
 
 async function getAllUsers(_: Request, res: Response) {
-    const users = await User.find({});
+    const users = await User.find({}).sort("name");
     res.status(StatusCodes.OK).json(users);
 }
 
