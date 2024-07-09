@@ -35,7 +35,9 @@ function Login() {
             localStorage.setItem("id", data.id);
 
             setMessage("Úspěšné přihlášení, počkej chvíli ✅🥳");
-            navigate("/");
+            setTimeout(() => {
+                navigate("/")
+            }, 500);
         } catch (err) {
             setMessage("Špatné údaje, zkus to znova ❌🙁");
         }
@@ -46,7 +48,7 @@ function Login() {
         <Header />
         <div id="login-form-wrap">
             <form id="login-form" onSubmit={handleSubmit}>
-                <h2>Přihlašení 👋</h2>
+                <h2>Přihlášení 👋</h2>
                 <input type="text" value={username} placeholder="jméno"
                 onChange={e => setUsername(e.target.value)} required />
                 <input type="password" value={password} placeholder="heslo"
