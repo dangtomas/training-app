@@ -3,9 +3,11 @@ import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
 import UserProps from "../types/UserProps";
 import PlayerCardSmall from "../components/PlayerCardSmall";
+import PlayerCardBig from "../components/PlayerCardBig";
 
 function Members() {
-    const [members, setMembers] = useState([]);
+    const [members, setMembers] = useState<UserProps[]>([]);
+    const [coach, setCoach] = useState<UserProps>();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -22,26 +24,39 @@ function Members() {
                     throw new Error();
                 }
 
-                let data = await response.json();
+                let data: UserProps[] = await response.json();
                 setMembers(data);
             } catch(err) {
                 navigate("/login");
             }
         }
         fetchMembers();
-    }, [])
+    },[])
+
+    useEffect(() => {
+        setCoach(members.find(member => member._id === "668d082fbb6894b643abeb6b")!)   
+    }, [members])
 
     return (
         <>
         <Header />
+        <div id="coach-wrap">
+            <PlayerCardBig
+                name={coach?.name || "načítání"}
+                profilePicSrc={coach?.profilePicSrc || ""}
+                host={{isHost: false, removeHost: () => {}}} 
+            />
+        </div>
         <div id="members-wrapper">
-            {members.map((member: UserProps) => {
-                return <PlayerCardSmall 
+            {members.map((member) => {
+                if (member._id !== "668d082fbb6894b643abeb6b") {
+                    return <PlayerCardSmall 
                             name={member.name}
                             profilePicSrc={member.profilePicSrc}
                             host={{isHost: false, removeHost: () => {}}}
                             key={member.username} 
-                        />
+                    />
+                }
             })}
         </div>
         </>

@@ -416,6 +416,20 @@ input::-webkit-date-and-time-value {
 
 
 /* members page ------------------------------------------*/
+
+#coach-wrap {
+    width: 92%;
+    max-width: 600px;
+    background-color: white;
+    border: 2px solid rgb(132, 127, 127);
+    border-bottom: 7px solid black;
+    border-radius: 10px;
+    box-shadow: 0 0 3px rgb(160, 156, 156);
+    padding: 5px;
+    margin-top: 90px;
+    margin-bottom: 20px;
+}
+
 #members-wrapper {
     width: 92%;
     max-width: 600px;
@@ -425,7 +439,6 @@ input::-webkit-date-and-time-value {
     border-radius: 10px;
     box-shadow: 0 0 3px rgb(160, 156, 156);
     padding: 15px;
-    margin-top: 90px;
 }
 
 
