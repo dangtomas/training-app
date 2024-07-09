@@ -37,7 +37,7 @@ function TrainingCard(props: TrainingCardProps) {
             }
 
             const response = await fetch(
-                `https://training-app-server-uh3u.onrender.com/api/users/${id}`, {
+                `https://training-app-0ni3.onrender.com/api/users/${id}`, {
                 method: "GET",
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
@@ -67,7 +67,7 @@ function TrainingCard(props: TrainingCardProps) {
 
     async function updateTraining(addingHost: boolean) {
         try {
-            const response = await fetch(`https://training-app-server-uh3u.onrender.com/api/trainings/${props._id}`,
+            const response = await fetch(`https://training-app-0ni3.onrender.com/api/trainings/${props._id}`,
                 {
                     method: "PATCH",
                     headers: {
@@ -112,7 +112,7 @@ function TrainingCard(props: TrainingCardProps) {
 
     async function handleDelete() {
         try {
-            const response = await fetch(`https://training-app-server-uh3u.onrender.com/api/trainings/${props._id}`,
+            const response = await fetch(`https://training-app-0ni3.onrender.com/api/trainings/${props._id}`,
                 {
                     method: "DELETE",
                     headers: {

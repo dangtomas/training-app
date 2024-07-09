@@ -13,7 +13,7 @@ function Members() {
     useEffect(() => {
         async function fetchMembers() {
             try {
-                const response = await fetch("https://training-app-server-uh3u.onrender.com/api/users", {
+                const response = await fetch("https://training-app-0ni3.onrender.com/api/users", {
                     method: "GET",
                     headers: {
                         "Authorization": `Bearer ${localStorage.getItem("token")}`

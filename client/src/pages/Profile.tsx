@@ -26,7 +26,7 @@ function Profile() {
         
         try {
             await fetch(
-                `https://training-app-server-uh3u.onrender.com/api/users/${localStorage.getItem("id")}`, {
+                `https://training-app-0ni3.onrender.com/api/users/${localStorage.getItem("id")}`, {
                     method: "PATCH",
                     headers: {
                         "Authorization": `Bearer ${localStorage.getItem("token")}`,

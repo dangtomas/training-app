@@ -26,7 +26,7 @@ const useFetchUser = (id: string) => {
                 }
                 
                 const response = await fetch(
-                    `https://training-app-server-uh3u.onrender.com/api/users/${id}`, {
+                    `https://training-app-0ni3.onrender.com/api/users/${id}`, {
                     method: "GET",
                     headers: {
                         "Authorization": `Bearer ${localStorage.getItem("token")}`

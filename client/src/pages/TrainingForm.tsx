@@ -33,13 +33,13 @@ function TrainingForm() {
         }
         try {
             if (state.isNew) {
-                await fetch("https://training-app-server-uh3u.onrender.com/api/trainings", {
+                await fetch("https://training-app-0ni3.onrender.com/api/trainings", {
                     method: "POST",
                     headers,
                     body
                 })
             } else {
-                await fetch(`https://training-app-server-uh3u.onrender.com/api/trainings/${state._id}`, {
+                await fetch(`https://training-app-0ni3.onrender.com/api/trainings/${state._id}`, {
                     method: "PATCH",
                     headers,
                     body

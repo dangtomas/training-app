@@ -21,7 +21,7 @@ function TrainingsPage() {
             try {
                 const queryString = `?from=${fromRef.current!.value}&to=${toRef.current!.value}`;
                 const response = await fetch(
-                    `https://training-app-server-uh3u.onrender.com/api/trainings${queryString}`, 
+                    `https://training-app-0ni3.onrender.com/api/trainings${queryString}`, 
                     {
                         method: "GET",
                         headers: {
