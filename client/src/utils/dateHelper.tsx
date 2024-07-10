@@ -57,30 +57,12 @@ function addDurationToDate(date: Date, duration: number): Date {
 
 function generateDateString(date: Date, duration: number): string {
     return `
-            ${numberToDay(date.getDay())},
-            ${date.getDate()}. ${numberToMonth(date.getMonth())}, 
-            ${date.getHours()}:${date.getMinutes().toString().padStart(2, "0")} - 
-            ${addDurationToDate(date, duration).getHours()}:${
-            addDurationToDate(date, duration).getMinutes().toString().padStart(2, "0")}
+            ${numberToDay(date.getUTCDay())},
+            ${date.getUTCDate()}. ${numberToMonth(date.getUTCMonth())}, 
+            ${date.getUTCHours()}:${date.getUTCMinutes().toString().padStart(2, "0")} - 
+            ${addDurationToDate(date, duration).getUTCHours()}:${
+            addDurationToDate(date, duration).getUTCMinutes().toString().padStart(2, "0")}
         `
 }
 
-function getOneMonthRange(): [string, string] {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = today.getMonth();
-    
-    let defaultFrom: string;
-    if (month === 0) {
-        defaultFrom = `${year - 1}-12-01`;
-    } else {
-        defaultFrom = `${year}-${month < 10 ? "0" : ""}${month}-01`;
-    }
-
-    const defaultTo = `${year}-${month + 1 < 10 ? "0" : ""}${month + 1}-01`
-    return [defaultFrom, defaultTo];
-}
-
-
-
-export { generateDateString, addDurationToDate, getOneMonthRange };
+export { generateDateString, addDurationToDate };
