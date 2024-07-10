@@ -1,6 +1,5 @@
 import { FormEvent, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { addDurationToDate } from "../utils/dateHelper";
 import Header from "../components/Header";
 
 function TrainingForm() {
@@ -68,7 +67,7 @@ function TrainingForm() {
             <label>Datum a čas</label>
             <input type="datetime-local" ref={dateRef} required
             defaultValue={
-                addDurationToDate(new Date(state.date), 120)
+                new Date(state.date)
                     .toISOString().substring(0,16)
             }/>
 
