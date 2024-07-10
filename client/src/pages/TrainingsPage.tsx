@@ -68,7 +68,7 @@ function TrainingsPage() {
                         state={JSON.parse(JSON.stringify({
                             activity: "Badminton",
                             duration: 90,
-                            date: new Date(),
+                            date: new Date().setHours(0, 0, 0, 0),
                             courts: 2,
                             courtPrice: 210,
                             isTrainer: true,
