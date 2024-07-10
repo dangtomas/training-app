@@ -11,6 +11,7 @@ function TrainingsPage() {
     const navigate = useNavigate();
     const [update, setUpdate] = useState(false);
     const [totalPrice, setTotalPrice] = useState(0);
+    const now = new Date();
 
     const fromRef = useRef<HTMLInputElement>(null);
     const toRef = useRef<HTMLInputElement>(null);
@@ -68,7 +69,7 @@ function TrainingsPage() {
                         state={JSON.parse(JSON.stringify({
                             activity: "Badminton",
                             duration: 90,
-                            date: new Date().setHours(0, 0, 0, 0),
+                            date: new Date(now.getTime() - now.getTimezoneOffset() * 60000),
                             courts: 2,
                             courtPrice: 210,
                             isTrainer: true,
