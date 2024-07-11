@@ -221,11 +221,16 @@ input::-webkit-date-and-time-value {
     margin: 15px 0;
 }
 
+.training-card-info {
+    word-wrap: break-word;
+}
+
 .training-card-overview {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 
 .training-card-buttons {
     text-align: end;
