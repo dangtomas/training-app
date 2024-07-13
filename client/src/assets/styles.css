@@ -311,7 +311,11 @@ input::-webkit-date-and-time-value {
 
 .training-card h3,
 .training-card h4 {
-    padding: 4px 20px;
+    padding: 4px 5px 4px 20px;
+}
+
+.training-card h3 {
+    font-size: 18px;
 }
 
 .training-card h2,
