@@ -446,6 +446,7 @@ input::-webkit-date-and-time-value {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+    padding: 5px;
 }
 
 .player-card-small {
@@ -455,11 +456,11 @@ input::-webkit-date-and-time-value {
 }
 
 .profile-pic-small {
-    height: 40px;
-    width: 40px;
+    height: 45px;
+    width: 45px;
     border-radius: 50%;
     border: 1px solid rgb(186, 186, 186);
-    margin: 10px 3px 10px 10px;
+    margin: 9px 4px 9px 10px;
 }
 
 .player-card-small-name {
