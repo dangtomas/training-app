@@ -261,6 +261,7 @@ input::-webkit-date-and-time-value {
     justify-content: flex-end;
     align-items: flex-end;
     min-height: 60px;
+    padding-bottom: 5px;
 }
 
 .show-more-button-wrap {
