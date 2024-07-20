@@ -210,7 +210,7 @@ input::-webkit-date-and-time-value {
 .training-card {
     display: flex;
     flex-direction: column;
-    min-height: 250px;
+    min-height: 200px;
     width: 95vw;
     max-width: 600px;
     background-color: white;
@@ -218,7 +218,7 @@ input::-webkit-date-and-time-value {
     border-bottom: 7px solid black;
     border-radius: 10px;
     box-shadow: 0 0 3px rgb(160, 156, 156);
-    margin: 15px 0;
+    margin-top: 15px;
 }
 
 .training-card-info {
@@ -260,7 +260,7 @@ input::-webkit-date-and-time-value {
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
-    min-height: 80px;
+    min-height: 60px;
 }
 
 .show-more-button-wrap {
@@ -320,14 +320,14 @@ input::-webkit-date-and-time-value {
 
 .training-card h2,
 .training-card p {
-    padding: 20px 20px 4px 20px;
+    padding: 15px 20px 4px 20px;
 }
 
 .add-host-btn {
     color: cornflowerblue;
     width: 100%;
     font-size: 14px;
-    padding: 10px 0;
+    padding: 5px 0 10px 0;
 }
 
 
@@ -450,7 +450,7 @@ input::-webkit-date-and-time-value {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    padding: 5px;
+    padding-left: 5px;
 }
 
 .player-card-small {
