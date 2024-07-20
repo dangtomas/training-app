@@ -479,10 +479,13 @@ input::-webkit-date-and-time-value {
 }
 
 .empty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     width: 100%;
     text-align: center;
     font-weight: normal;
-    margin: 10px 0;
+    height: 63px;
 }
 
 #profile-pic-big img, .profile-pic-small img {
