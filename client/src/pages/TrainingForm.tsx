@@ -93,8 +93,7 @@ function TrainingForm() {
             </div>
 
             <label>Doplňující info (volitelné)</label>
-            <input type="text" ref={infoRef} defaultValue={state.info}
-                    placeholder="Ranní technika na Sprintu." />
+            <input type="text" ref={infoRef} defaultValue={state.info} />
             <button className="login-button" type="submit">
                 {state.isNew ? "Vytvořit" : "Upravit"}
             </button>

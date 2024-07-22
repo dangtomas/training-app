@@ -194,14 +194,18 @@ function TrainingCard(props: TrainingCardProps) {
             </h2>
             <h3>{generateDateString(props.date, props.duration)}</h3>
             <h4>
-                {props.courts} kurt{props.courts > 1 ? "y" : ""} | 
-                Standa: {props.isTrainer ? "ano" : "ne"} | {
-                calculatePrice(props.duration, props.courts, props.courtPrice, 
-                props.isTrainer, props.attendance.length)},-
+                Kurty: {props.courts} | 
+                Standa: {props.isTrainer ? "✅" : "❌"} 
             </h4>
-            <p>{props.info}</p>
+            <h4>
+                Účast: {attendanceList.length} | 
+                Na hráče: {calculatePrice(props.duration, props.courts, 
+                props.courtPrice, props.isTrainer, props.attendance.length)},-
+            </h4> 
+            
+            <p className={props.info ? "" : "hidden"}>{props.info}</p>
         </div>
-        <div className="training-card-button-wrap">
+        <div className={`training-card-button-wrap ${props.info ? "" : "padding-top"}`}>
             <div className="show-more-button-wrap">
                 <button className="show-more-button" onClick={() => setShowAttendance(a => !a)}>
                     <i className="fa-solid fa-circle-chevron-down"></i>

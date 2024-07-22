@@ -260,8 +260,7 @@ input::-webkit-date-and-time-value {
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
-    min-height: 60px;
-    padding-bottom: 5px;
+    min-height: 60px; 
 }
 
 .show-more-button-wrap {
@@ -310,18 +309,23 @@ input::-webkit-date-and-time-value {
     color: white;
 }
 
-.training-card h3,
-.training-card h4 {
-    padding: 4px 5px 4px 20px;
+.training-card h2 {
+    padding: 15px 20px 4px 20px;
 }
 
 .training-card h3 {
+    padding-left: 20px;
     font-size: 18px;
 }
 
-.training-card h2,
+.training-card h4 {
+    padding-left: 20px;
+    padding-top: 7px;
+    font-weight: normal;
+}
+
 .training-card p {
-    padding: 15px 20px 4px 20px;
+    padding: 20px 5px 10px 20px;
 }
 
 .add-host-btn {
@@ -716,6 +720,10 @@ input::-webkit-date-and-time-value {
 /* OTHERS ------------------------------------------------------------------ */
 .hidden {
     display: none !important;
+}
+
+.padding-top {
+    padding-top: 20px;
 }
 
 @media only screen and (max-width: 500px) {
