@@ -8,6 +8,7 @@ interface UserDocument extends Document {
     username: string,
     password: string,
     profilePicSrc: string,
+    isAdmin: boolean,
     comparePassword: (other: string) => Promise<boolean>,
     createJWT: () => string;
 }
@@ -16,7 +17,8 @@ const UserSchema = new Schema<UserDocument>({
     name: {type: String}, 
     username: { type: String, unique: true },
     password: { type: String, minlength: 4 },
-    profilePicSrc: {type: String}
+    profilePicSrc: {type: String},
+    isAdmin: { type: Boolean }
 });
 
 UserSchema.pre('save', async function() {
