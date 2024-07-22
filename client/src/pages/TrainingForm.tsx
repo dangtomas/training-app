@@ -44,7 +44,7 @@ function TrainingForm() {
                     body
                 })
             }
-            if (response.status != 200) {
+            if (response.status !== 200 && response.status !== 201) {
                 throw new Error();
             }
         } catch(error) {
