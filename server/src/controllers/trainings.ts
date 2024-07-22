@@ -38,9 +38,12 @@ async function updateTraining(req: Request, res: Response) {
 }
 
 async function deleteTraining(req: Request, res: Response) {
-    const { id: trainingId } = req.params;
-    await Training.findByIdAndDelete({ _id: trainingId });
-    res.status(StatusCodes.OK).send();
+    if ((<any>req).user.isAdmin) {
+        const { id: trainingId } = req.params;
+        await Training.findByIdAndDelete({ _id: trainingId });
+        res.status(StatusCodes.OK).send();
+    }
+    return res.status(StatusCodes.UNAUTHORIZED).send();
 }
 
 

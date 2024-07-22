@@ -26,7 +26,8 @@ async function authenticate(req: Request, _: Response, next: NextFunction) {
         //we know exactly what is in decoded, therefore using any
         (<any>req).user = { 
             userId: user._id, 
-            name: user.name
+            name: user.name,
+            isAdmin: user.isAdmin
         };
         next();
     } catch (err) {
