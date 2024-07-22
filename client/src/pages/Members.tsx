@@ -49,7 +49,8 @@ function Members() {
         </div>
         <div id="members-wrapper">
             {members.map((member) => {
-                if (member._id !== "668d082fbb6894b643abeb6b") {
+                if (member._id !== "668d082fbb6894b643abeb6b" && 
+                    member._id !== "669e2e4da78779b9287aaafd") {
                     return <PlayerCardSmall 
                             name={member.name}
                             profilePicSrc={member.profilePicSrc}
