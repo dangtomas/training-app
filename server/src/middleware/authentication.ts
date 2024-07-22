@@ -19,16 +19,17 @@ async function authenticate(req: Request, _: Response, next: NextFunction) {
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET!);
-        const user = await User.findOne({_id: (<{userId: string}>decoded).userId });
+        const user = await User.findOne({_id: (<any>decoded).userId });
         if (!user) {
             throw new Error();
         }
-        //we know exactly what is in decoded, therefore using any
+
         (<any>req).user = { 
             userId: user._id, 
             name: user.name,
             isAdmin: user.isAdmin
         };
+        
         next();
     } catch (err) {
         throw new UnauthenticatedError("Invalid authentication.");
