@@ -89,7 +89,7 @@ function TrainingCard(props: TrainingCardProps) {
             
             
         } catch(err) {
-            navigate("/error");
+            navigate("/login");
         }
     }
 
@@ -124,10 +124,11 @@ function TrainingCard(props: TrainingCardProps) {
             if (response.status != 200) {
                 throw new Error();
             }
+        } catch(err) {
+            alert("Nepodařilo se odstranit trénink.");
+        } finally {
             setIsDeleteModal(false);
             props.updatePage();
-        } catch(err) {
-            navigate("/error");
         }
     }
 
