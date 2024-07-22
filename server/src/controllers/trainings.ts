@@ -28,20 +28,23 @@ async function getTraining(req: Request, res: Response) {
 }
 
 async function updateTraining(req: Request, res: Response) {
-    const { id: trainingId } = req.params;
-    const training = await Training.findByIdAndUpdate(
-        { _id: trainingId },
-        req.body,
-        { new: true }
-    )
-    res.status(StatusCodes.OK).json({ training });
+    if ((<any>req).user.isAdmin || req.body.attendance) {
+        const { id: trainingId } = req.params;
+        const training = await Training.findByIdAndUpdate(
+            { _id: trainingId },
+            req.body,
+            { new: true }
+        )
+        return res.status(StatusCodes.OK).json({ training });
+    }
+    return res.status(StatusCodes.UNAUTHORIZED).send();
 }
 
 async function deleteTraining(req: Request, res: Response) {
     if ((<any>req).user.isAdmin) {
         const { id: trainingId } = req.params;
         await Training.findByIdAndDelete({ _id: trainingId });
-        res.status(StatusCodes.OK).send();
+        return res.status(StatusCodes.OK).send();
     }
     return res.status(StatusCodes.UNAUTHORIZED).send();
 }
