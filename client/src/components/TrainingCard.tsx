@@ -87,9 +87,8 @@ function TrainingCard(props: TrainingCardProps) {
                 setUpdate(a => !a);
             }
             
-            
         } catch(err) {
-            navigate("/login");
+           navigate("/login");
         }
     }
 
@@ -125,7 +124,7 @@ function TrainingCard(props: TrainingCardProps) {
                 throw new Error();
             }
         } catch(err) {
-            alert("Nepodařilo se odstranit trénink.");
+            alert("Nemůžeš odstranit trénink 😔");
         } finally {
             setIsDeleteModal(false);
             props.updatePage();

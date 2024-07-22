@@ -23,7 +23,6 @@ function TrainingForm() {
             courts: courtsRef.current!.value,
             courtPrice: courtPriceRef.current!.value,
             isTrainer: yesTrainerRef.current!.checked,
-            attendance: state.attendance,
             info: infoRef.current!.value
         })
         const headers = {
@@ -31,22 +30,27 @@ function TrainingForm() {
             "Content-Type": "application/json",
         }
         try {
+            let response = null;
             if (state.isNew) {
-                await fetch("https://training-app-0ni3.onrender.com/api/trainings", {
+                response = await fetch("https://training-app-0ni3.onrender.com/api/trainings", {
                     method: "POST",
                     headers,
                     body
                 })
             } else {
-                await fetch(`https://training-app-0ni3.onrender.com/api/trainings/${state._id}`, {
+                response = await fetch(`https://training-app-0ni3.onrender.com/api/trainings/${state._id}`, {
                     method: "PATCH",
                     headers,
                     body
                 })
             }
-            navigate("/trainings")     
+            if (response.status != 200) {
+                throw new Error();
+            }
         } catch(error) {
-            navigate("/login");
+            alert("Nemůžeš upravovat tréninky 😔");
+        } finally {
+            navigate("/trainings")
         }
     }
 
