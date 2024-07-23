@@ -52,9 +52,10 @@ function TrainingCard(props: TrainingCardProps) {
             return {...data, host: false};
         }
 
-        async function fetchAttendance() {
+        async function fetchUserAttendance() {
             try {
-                const attendancePromises = props.attendance.map(id => fetchUser(id));
+                const attendance: string[] = await fetchAttendance();
+                const attendancePromises = attendance.map(id => fetchUser(id));
                 const data = await Promise.all(attendancePromises);
                 setAttendanceList(data);
             } catch (err) {
@@ -62,10 +63,31 @@ function TrainingCard(props: TrainingCardProps) {
             }
             
         }
-        fetchAttendance();
+        fetchUserAttendance();
     }, [attended, update])
 
-    async function updateTraining(addingHost: boolean) {
+    async function fetchAttendance() {
+        try {
+            const response = await fetch(
+                `https://training-app-0ni3.onrender.com/api/trainings/${props._id}`, {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                }
+            });
+
+            if (response.status !== 200) {
+                throw new Error();
+            }
+
+            const data = await response.json();
+            return data.training.attendance;
+        } catch {
+            navigate("/login");
+        }
+    }
+
+    async function updateTraining(addingHost: boolean, attendance: string[]) {
         try {
             const response = await fetch(`https://training-app-0ni3.onrender.com/api/trainings/${props._id}`,
                 {
@@ -74,7 +96,7 @@ function TrainingCard(props: TrainingCardProps) {
                         "Authorization": `Bearer ${localStorage.getItem("token")}`,
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({attendance: props.attendance})
+                    body: JSON.stringify({attendance})
                 }
             )
             if (response.status != 200) {
@@ -92,22 +114,24 @@ function TrainingCard(props: TrainingCardProps) {
         }
     }
 
-    function handleYes() {
+    async function handleYes() {
+        const attendance = await fetchAttendance();
         if (attended || localStorage.getItem("id") === "host" ||
-            props.attendance.includes(localStorage.getItem("id")!)) {
+            attendance.includes(localStorage.getItem("id")!)) {
             return;
         }
-        props.attendance.push(localStorage.getItem("id")!)
-        updateTraining(false);
+        attendance.push(localStorage.getItem("id")!)
+        updateTraining(false, attendance);
     }
 
-    function handleNo() {
+    async function handleNo() {
+        const attendance = await fetchAttendance();
         if (!attended) {
             return;
         }
-        const index = props.attendance.indexOf(localStorage.getItem("id")!);
-        props.attendance.splice(index, 1);
-        updateTraining(false);
+        const index = attendance.indexOf(localStorage.getItem("id")!);
+        attendance.splice(index, 1);
+        updateTraining(false, attendance);
     }
 
     async function handleDelete() {
@@ -131,18 +155,20 @@ function TrainingCard(props: TrainingCardProps) {
         }
     }
 
-    function handleAddHost() {
+    async function handleAddHost() {
+        const attendance = await fetchAttendance();
         if (localStorage.getItem("id") !== "host") {
-            props.attendance.push(`HOST-${addHostRef.current!.value}`);
-            updateTraining(true);
+            attendance.push(`HOST-${addHostRef.current!.value}`);
+            updateTraining(true, attendance);
         }
         setIsAddHostModal(false);
     }
 
-    function removeHost(name: string) {
-        const index = props.attendance.indexOf(`HOST-${name}`);
-        props.attendance.splice(index, 1);
-        updateTraining(true);
+    async function removeHost(name: string) {
+        const attendance = await fetchAttendance();
+        const index = attendance.indexOf(`HOST-${name}`);
+        attendance.splice(index, 1);
+        updateTraining(true, attendance);
     }
 
     return (<>
@@ -200,7 +226,7 @@ function TrainingCard(props: TrainingCardProps) {
             <h4>
                 Účast: {attendanceList.length} | 
                 Na hráče: {calculatePrice(props.duration, props.courts, 
-                props.courtPrice, props.isTrainer, props.attendance.length)},-
+                props.courtPrice, props.isTrainer, attendanceList.length)},-
             </h4> 
             
             <p className={props.info ? "" : "hidden"}>{props.info}</p>
