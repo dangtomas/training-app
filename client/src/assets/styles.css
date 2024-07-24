@@ -205,6 +205,9 @@ input::-webkit-date-and-time-value {
     background-color: white;
 }
 
+.loading {
+    margin-top: 50px;
+}
 
 /* training card --------------------------------- */
 .training-card {

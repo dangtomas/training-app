@@ -60,7 +60,7 @@ function TrainingCard(props: TrainingCardProps) {
                 const data = await Promise.all(attendancePromises);
                 setAttendanceList(data);
             } catch (err) {
-                navigate("/error");
+                navigate("/login");
             }
             
         }

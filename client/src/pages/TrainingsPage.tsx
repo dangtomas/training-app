@@ -11,6 +11,7 @@ function TrainingsPage() {
     const navigate = useNavigate();
     const [update, setUpdate] = useState(false);
     const [totalPrice, setTotalPrice] = useState(0);
+    const [loading, setLoading] = useState(true);
     const now = new Date();
 
     const fromRef = useRef<HTMLInputElement>(null);
@@ -40,6 +41,7 @@ function TrainingsPage() {
                     )
                 }
                 setTrainings(data);
+                setLoading(false);
                 setTotalPrice(data.reduce((curr: number, training: TrainingCardProps) => {
                     return curr + calculatePrice(training.duration, training.courts,
                                                  training.courtPrice, training.isTrainer,
@@ -109,6 +111,7 @@ function TrainingsPage() {
                     </label>
                 </form>
             </div>
+            {loading && <h1 className="loading">Načítání...</h1>}
             {trainings.map((training: TrainingCardProps) => {
             return <TrainingCard 
                     _id={training._id}
