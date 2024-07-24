@@ -55,6 +55,7 @@ function TrainingCard(props: TrainingCardProps) {
         async function fetchUserAttendance() {
             try {
                 const attendance: string[] = await fetchAttendance();
+                setAttended(attendance.includes(localStorage.getItem("id")!))
                 const attendancePromises = attendance.map(id => fetchUser(id));
                 const data = await Promise.all(attendancePromises);
                 setAttendanceList(data);
@@ -87,7 +88,7 @@ function TrainingCard(props: TrainingCardProps) {
         }
     }
 
-    async function updateTraining(addingHost: boolean, attendance: string[]) {
+    async function updateTraining(attendance: string[]) {
         try {
             const response = await fetch(`https://training-app-0ni3.onrender.com/api/trainings/${props._id}`,
                 {
@@ -103,11 +104,7 @@ function TrainingCard(props: TrainingCardProps) {
                 throw new Error();
             }
 
-            if (!addingHost) {
-                setAttended(a => !a);
-            } else {
-                setUpdate(a => !a);
-            }
+            setUpdate(a => !a);
             
         } catch(err) {
            navigate("/login");
@@ -115,23 +112,37 @@ function TrainingCard(props: TrainingCardProps) {
     }
 
     async function handleYes() {
-        const attendance = await fetchAttendance();
+        let attendance = await fetchAttendance();
         if (attended || localStorage.getItem("id") === "host" ||
             attendance.includes(localStorage.getItem("id")!)) {
             return;
         }
         attendance.push(localStorage.getItem("id")!)
-        updateTraining(false, attendance);
+        updateTraining(attendance);
+
+        setTimeout(async () => {
+            attendance = await fetchAttendance();
+            if (!attendance.includes(localStorage.getItem("id"))) {
+                alert("Zkus to znova, někde došlo k chybě")
+            }
+        }, 500)
     }
 
     async function handleNo() {
-        const attendance = await fetchAttendance();
+        let attendance = await fetchAttendance();
         if (!attended) {
             return;
         }
         const index = attendance.indexOf(localStorage.getItem("id")!);
         attendance.splice(index, 1);
-        updateTraining(false, attendance);
+        updateTraining(attendance);
+
+        setTimeout(async () => {
+            attendance = await fetchAttendance();
+            if (attendance.includes(localStorage.getItem("id"))) {
+                alert("Zkus to znova, někde došlo k chybě")
+            }
+        }, 500)
     }
 
     async function handleDelete() {
@@ -156,19 +167,34 @@ function TrainingCard(props: TrainingCardProps) {
     }
 
     async function handleAddHost() {
-        const attendance = await fetchAttendance();
+        let attendance = await fetchAttendance();
+        const hostId = `HOST-${addHostRef.current!.value}`
         if (localStorage.getItem("id") !== "host") {
-            attendance.push(`HOST-${addHostRef.current!.value}`);
-            updateTraining(true, attendance);
+            attendance.push(hostId);
+            updateTraining(attendance);
         }
         setIsAddHostModal(false);
+
+        setTimeout(async () => {
+            attendance = await fetchAttendance();
+            if (!attendance.includes(hostId)) {
+                alert("Zkus to znova, někde došlo k chybě.")
+            }
+        }, 500)
     }
 
     async function removeHost(name: string) {
-        const attendance = await fetchAttendance();
+        let attendance = await fetchAttendance();
         const index = attendance.indexOf(`HOST-${name}`);
         attendance.splice(index, 1);
-        updateTraining(true, attendance);
+        updateTraining(attendance);
+
+        setTimeout(async () => {
+            attendance = await fetchAttendance();
+            if (attendance.includes(`HOST-${name}`)) {
+                alert("Zkus to znova, někde došlo k chybě.")
+            }
+        }, 500)
     }
 
     return (<>
