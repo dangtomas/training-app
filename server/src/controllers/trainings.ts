@@ -18,7 +18,7 @@ async function getAllTrainings(req: Request, res: Response) {
 
 async function createTraining(req: Request, res: Response) {
     const training = await Training.create(req.body);
-    res.status(StatusCodes.CREATED).json(Training);
+    res.status(StatusCodes.CREATED).json(training);
 }
 
 async function getTraining(req: Request, res: Response) {
