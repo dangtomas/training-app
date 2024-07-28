@@ -4,6 +4,7 @@ import dbConnect from "@/db/dbConnect";
 dbConnect();
 
 export async function GET(req: Request) {
+    console.log(req.headers.get("isAdmin"));
     const url = new URL(req.url);
     const from = url.searchParams.get("from");
     const to = url.searchParams.get("to");
