@@ -1,5 +1,5 @@
 import { headers } from "next/headers";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import authenticate from "./app/api/authentication";
 
 export function middleware(req: NextRequest) {
@@ -12,6 +12,3 @@ export function middleware(req: NextRequest) {
 
 
 
-export const config = {
-    matcher: "/api/:path+"
-}
