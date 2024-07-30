@@ -30,7 +30,7 @@ export default function Login() {
 
             const data = await response.json();
             setMessage("Úspěšné přihlášení, počkej chvíli ✅🥳");
-            router.push("/");
+            router.push("/members");
         } catch (err) {
             setMessage("Špatné údaje, zkus to znova ❌🙁");
         }
