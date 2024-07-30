@@ -3,17 +3,17 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    @apply bg-gradient-to-t from-[#c6edbb] to-[#def4d7] bg-fixed;
-  }
+    body {
+        @apply bg-gradient-to-t from-[#c6edbb] to-[#def4d7] bg-fixed;
+    }
 }
 
 @layer components {
-  .box {
-    @apply mx-auto flex flex-col items-center justify-center rounded-lg border border-b-[7px] border-gray-400 border-b-black bg-white shadow-lg;
-  }
+    .box {
+        @apply mx-auto flex w-[95vw] max-w-[600px] flex-col items-center justify-center rounded-lg border border-b-[7px] border-gray-400 border-b-black bg-white shadow-lg;
+    }
 
-  .login-input {
-    @apply my-2 inline-block w-[90%] rounded-sm border border-gray-400 px-5 py-2;
-  }
+    .login-input {
+        @apply my-2 inline-block w-[90%] rounded-sm border border-gray-400 px-3 py-2;
+    }
 }
