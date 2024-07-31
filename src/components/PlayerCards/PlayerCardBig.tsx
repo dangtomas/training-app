@@ -1,6 +1,6 @@
 export default function Big(props: { name: string; profilePicSrc: string }) {
     return (
-        <div className="box flex-row p-8">
+        <div className="flex w-full flex-row items-center justify-between p-8">
             <div className="h-20 w-20 rounded-full border border-gray-400">
                 <img className="rounded-full" src={props.profilePicSrc} />
             </div>

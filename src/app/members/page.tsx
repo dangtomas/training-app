@@ -16,7 +16,7 @@ export default async function Members() {
 
     return (
         <>
-            <div className="mt-24">
+            <div className="box mt-24">
                 <PlayerCardBig
                     name={coach.name}
                     profilePicSrc={coach.profilePicSrc}
