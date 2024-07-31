@@ -13,7 +13,6 @@ export default async function Members() {
             !user._id.equals(coach._id) &&
             !user._id.equals("669e2e4da78779b9287aaafd"),
     );
-    console.log(users[0]._id);
 
     return (
         <>

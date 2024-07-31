@@ -21,6 +21,6 @@ export async function POST(req: Request) {
         { status: 200 },
     );
     response.cookies.set("token", token);
-
+    response.cookies.set("id", user._id);
     return response;
 }
