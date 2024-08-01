@@ -1,24 +1,13 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import Script from "next/script";
+import Link from "next/link";
 
 export default function HomeButton() {
-    const router = useRouter();
     return (
         <>
-            <Script
-                src="https://kit.fontawesome.com/651d93916d.js"
-                crossOrigin="anonymous"
-            />
-            <button
-                type="button"
-                onClick={() => {
-                    router.push("/");
-                }}
-            >
+            <Link href="/">
                 <i className="fa-solid fa-house px-2.5 text-xl hover:text-stone-800"></i>
-            </button>
+            </Link>
         </>
     );
 }

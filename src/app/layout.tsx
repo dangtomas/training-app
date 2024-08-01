@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header/Header";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,6 +21,10 @@ export default function RootLayout({
             <body className={`${inter.className}`}>
                 <Header />
                 {children}
+                <Script
+                    src="https://kit.fontawesome.com/651d93916d.js"
+                    crossOrigin="anonymous"
+                />
             </body>
         </html>
     );

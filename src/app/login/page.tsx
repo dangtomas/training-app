@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
+import deleteCookies from "./deleteCookies";
 
 export default function Login() {
     const [username, setUsername] = useState("");
@@ -10,7 +11,7 @@ export default function Login() {
     const router = useRouter();
 
     useEffect(() => {
-        localStorage.clear();
+        deleteCookies();
     }, []);
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -30,7 +31,7 @@ export default function Login() {
 
             const data = await response.json();
             setMessage("Úspěšné přihlášení, počkej chvíli ✅🥳");
-            router.push("/members");
+            router.push("/");
         } catch (err) {
             setMessage("Špatné údaje, zkus to znova ❌🙁");
         }
