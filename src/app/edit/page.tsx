@@ -34,7 +34,7 @@ export default function Edit() {
                         name={user.name}
                         profilePicSrc={user.profilePicSrc}
                     />
-                    <UploadPicWidget />
+                    <UploadPicWidget setMessage={setMessage} />
                     <div className="w-full px-6 pb-4">
                         <h3 className="text-xl font-bold">
                             Přihlašovací jméno

@@ -3,6 +3,7 @@
 import { getCookie } from "cookies-next";
 import { CldUploadWidget } from "next-cloudinary";
 import { useRouter } from "next/navigation";
+import { Dispatch, SetStateAction } from "react";
 
 async function updateProfilePic(url: string) {
     await fetch(`api/users/${getCookie("id")}`, {
@@ -15,7 +16,9 @@ async function updateProfilePic(url: string) {
     });
 }
 
-export default function UploadPicWidget() {
+export default function UploadPicWidget(props: {
+    setMessage: Dispatch<SetStateAction<string>>;
+}) {
     const router = useRouter();
     return (
         <CldUploadWidget
@@ -23,8 +26,9 @@ export default function UploadPicWidget() {
             onSuccess={async (result) => {
                 try {
                     await updateProfilePic((result.info as any).url);
+                    props.setMessage("Úspěšně změněno 💪✅");
                 } catch (err) {
-                    router.push("/login");
+                    props.setMessage("Někde došlo k chybě ❌🙁");
                 }
             }}
         >
@@ -32,7 +36,10 @@ export default function UploadPicWidget() {
                 return (
                     <button
                         className="mb-6 mt-[-25px] cursor-pointer px-6 text-sm text-sky-500"
-                        onClick={() => open()}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            open();
+                        }}
                     >
                         Nahrát obrázek
                     </button>
