@@ -1,13 +1,9 @@
-import Week from "@/types/Week";
 import { getCookie } from "cookies-next";
 
-export default async function fetchTrainings(currentWeek: Week | undefined) {
-    if (!currentWeek) {
-        return;
-    }
-    const from = currentWeek.from.substring(0, 10);
-    const to = currentWeek.to.substring(0, 10);
-    const queryString = `?from=${from}&to=${to}`;
+export default async function fetchTrainings(from: Date, to: Date) {
+    const fromString = from.toISOString().substring(0, 10);
+    const toString = to.toISOString().substring(0, 10);
+    const queryString = `?from=${fromString}&to=${toString}`;
     const response = await fetch(`/api/trainings${queryString}`, {
         method: "GET",
         headers: {

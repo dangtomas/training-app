@@ -1,6 +1,6 @@
 export default interface Week {
     name: string;
-    from: string;
-    to: string;
+    from: Date;
+    to: Date;
     _id: string;
 }

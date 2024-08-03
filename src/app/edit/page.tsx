@@ -1,27 +1,36 @@
 "use client";
 import PlayerCardBig from "@/components/PlayerCards/PlayerCardBig";
-import { getCookie } from "cookies-next";
-import { useRef, useState } from "react";
-import editProfile from "./editProfile";
-import useFetchUser from "@/utils/useFetchUser";
+import { useEffect, useRef, useState } from "react";
+import editProfile from "../../utils/editProfile";
+import { useRouter } from "next/navigation";
 import UploadPicWidget from "@/components/UploadPicWidget";
+import User from "@/types/User";
+import fetchUser from "@/utils/fetchUser";
+import { getCookie } from "cookies-next";
 
 export default function Edit() {
+    const router = useRouter();
     const [message, setMessage] = useState("‎");
     const passwordRef = useRef<HTMLInputElement>(null);
-    const { user } = useFetchUser(getCookie("id")!);
+    const [user, setUser] = useState<User>({
+        name: "",
+        username: "",
+        profilePicSrc: "",
+    });
+
+    useEffect(() => {
+        fetchUser(getCookie("id")!).then((result) => {
+            setUser(result);
+        });
+    }, []);
 
     return (
         <form
             className="box mt-24 items-start"
             action={async (formData: FormData) => {
-                try {
-                    await editProfile(formData);
-                    setMessage("Úspěšně změněno 💪✅");
-                    passwordRef.current!.value = "";
-                } catch (err) {
-                    setMessage("Někde došlo k chybě ❌🙁");
-                }
+                await editProfile(formData);
+                setMessage("Úspěšně změněno 💪✅");
+                passwordRef.current!.value = "";
             }}
         >
             {user.name === "" ? (
@@ -34,6 +43,7 @@ export default function Edit() {
                         name={user.name}
                         profilePicSrc={user.profilePicSrc}
                     />
+
                     <UploadPicWidget setMessage={setMessage} />
                     <div className="w-full px-6 pb-4">
                         <h3 className="text-xl font-bold">

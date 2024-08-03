@@ -24,12 +24,8 @@ export default function UploadPicWidget(props: {
         <CldUploadWidget
             uploadPreset="vv63enoi"
             onSuccess={async (result) => {
-                try {
-                    await updateProfilePic((result.info as any).url);
-                    props.setMessage("Úspěšně změněno 💪✅");
-                } catch (err) {
-                    props.setMessage("Někde došlo k chybě ❌🙁");
-                }
+                await updateProfilePic((result.info as any).url);
+                props.setMessage("Úspěšně změněno 💪✅");
             }}
         >
             {({ open }) => {

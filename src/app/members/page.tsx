@@ -25,11 +25,13 @@ export default async function Members() {
             <div className="box my-5 py-3">
                 {users.map((user) => {
                     return (
-                        <PlayerCardSmall
-                            key={user._id}
-                            name={user.name}
-                            profilePicSrc={user.profilePicSrc}
-                        />
+                        <div className="w-full px-6 py-3">
+                            <PlayerCardSmall
+                                key={user._id}
+                                name={user.name}
+                                profilePicSrc={user.profilePicSrc}
+                            />
+                        </div>
                     );
                 })}
             </div>
