@@ -147,7 +147,10 @@ export default function TrainingCard(training: Training) {
                         ) : (
                             attendanceList.map((user) => {
                                 return (
-                                    <div className="basis-1/2 pb-3">
+                                    <div
+                                        className="basis-1/2 pb-3"
+                                        key={user._id}
+                                    >
                                         <PlayerCardSmall
                                             name={user.name}
                                             profilePicSrc={user.profilePicSrc}

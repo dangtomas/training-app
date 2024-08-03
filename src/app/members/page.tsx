@@ -25,9 +25,8 @@ export default async function Members() {
             <div className="box my-5 py-3">
                 {users.map((user) => {
                     return (
-                        <div className="w-full px-6 py-3">
+                        <div className="w-full px-6 py-3" key={user._id}>
                             <PlayerCardSmall
-                                key={user._id}
                                 name={user.name}
                                 profilePicSrc={user.profilePicSrc}
                             />

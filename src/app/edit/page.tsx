@@ -13,6 +13,7 @@ export default function Edit() {
     const [message, setMessage] = useState("‎");
     const passwordRef = useRef<HTMLInputElement>(null);
     const [user, setUser] = useState<User>({
+        _id: "",
         name: "",
         username: "",
         profilePicSrc: "",
