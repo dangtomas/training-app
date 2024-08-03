@@ -1,6 +1,6 @@
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import isValidToken from "./app/api/authentication";
+import { isValidToken, APIauthenticate } from "./app/api/authentication";
 
 export function middleware(req: NextRequest) {
     const path = req.nextUrl.pathname;
@@ -8,6 +8,10 @@ export function middleware(req: NextRequest) {
 
     if (!token || !isValidToken(token)) {
         return NextResponse.redirect(new URL("/login", req.nextUrl));
+    }
+
+    if (path.startsWith("/api")) {
+        return APIauthenticate(headers().get("Authorization"));
     }
 }
 
@@ -17,6 +21,8 @@ export const config = {
         "/api/trainings/:id*",
         "/members",
         "/prices",
+        "/trainings",
+        "/edit",
         "/",
     ],
 };
