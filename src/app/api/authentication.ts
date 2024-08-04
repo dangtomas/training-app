@@ -30,7 +30,7 @@ export async function APIauthenticate(authHeader: string | null) {
         if (payload.isAdmin) {
             res.headers.set("isAdmin", "true");
         }
-        console.log(payload);
+
         return res;
     } catch (err) {
         console.log(err);

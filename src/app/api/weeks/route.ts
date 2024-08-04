@@ -4,7 +4,7 @@ import dbConnect from "@/db/dbConnect";
 dbConnect();
 
 export async function GET(req: Request) {
-    const weeks = await Week.find({}).sort("-from");
+    const weeks = await Week.find({}).sort("-from").limit(10);
     return Response.json(weeks, { status: 200 });
 }
 

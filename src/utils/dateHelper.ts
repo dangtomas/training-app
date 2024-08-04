@@ -57,14 +57,14 @@ export function addDurationToDate(date: Date, duration: number): Date {
 
 export function generateDateString(date: Date, duration: number): string {
     return `
-            ${numberToDay(date.getUTCDay())},
-            ${date.getUTCDate()}. ${numberToMonth(date.getUTCMonth())}, 
-            ${date.getUTCHours()}:${date.getUTCMinutes().toString().padStart(2, "0")} - 
-            ${addDurationToDate(date, duration).getUTCHours()}:${addDurationToDate(
+            ${numberToDay(date.getDay())},
+            ${date.getDate()}. ${numberToMonth(date.getMonth())}, 
+            ${date.getHours()}:${date.getMinutes().toString().padStart(2, "0")} - 
+            ${addDurationToDate(date, duration).getHours()}:${addDurationToDate(
                 date,
                 duration,
             )
-                .getUTCMinutes()
+                .getMinutes()
                 .toString()
                 .padStart(2, "0")}
         `;

@@ -2,14 +2,12 @@
 import PlayerCardBig from "@/components/PlayerCards/PlayerCardBig";
 import { useEffect, useRef, useState } from "react";
 import editProfile from "../../utils/editProfile";
-import { useRouter } from "next/navigation";
 import UploadPicWidget from "@/components/UploadPicWidget";
 import User from "@/types/User";
-import fetchUser from "@/utils/fetchUser";
+import fetchUser from "@/utils/api/fetchUser";
 import { getCookie } from "cookies-next";
 
 export default function Edit() {
-    const router = useRouter();
     const [message, setMessage] = useState("‎");
     const passwordRef = useRef<HTMLInputElement>(null);
     const [user, setUser] = useState<User>({

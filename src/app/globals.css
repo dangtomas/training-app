@@ -6,6 +6,10 @@
     body {
         @apply bg-gradient-to-t from-[#c6edbb] to-[#def4d7] bg-fixed;
     }
+
+    :root:has(.no-doc-scroll) {
+        overflow: hidden;
+    }
 }
 
 @layer components {

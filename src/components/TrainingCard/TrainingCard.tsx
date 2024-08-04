@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import { getCookie } from "cookies-next";
-import { SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Training from "@/types/Training";
 import User from "@/types/User";
 import { generateDateString } from "@/utils/dateHelper";
 import calculatePrice from "@/utils/calculatePrice";
-import fetchAttendance from "@/utils/fetchAttendance";
-import updateAttendance from "@/utils/updateAttendance";
-import fetchUser from "@/utils/fetchUser";
+import fetchAttendance from "@/utils/api/fetchAttendance";
+import updateAttendance from "@/utils/api/updateAttendance";
+import fetchUser from "@/utils/api/fetchUser";
 import PlayerCardSmall from "../PlayerCards/PlayerCardSmall";
 import DeleteTrainingModal from "./deleteTrainingModal";
 
@@ -89,7 +89,10 @@ export default function TrainingCard(training: Training) {
                         >
                             smazat
                         </button>
-                        <Link href="/" className="pr-2 text-sky-500">
+                        <Link
+                            href={`/training-form?trainingId=${training._id}`}
+                            className="pr-2 text-sky-500"
+                        >
                             upravit
                         </Link>
                     </div>
@@ -112,7 +115,7 @@ export default function TrainingCard(training: Training) {
                     )}
                     ,-
                 </h3>
-                <p className="py-2 pl-5">
+                <p className="px-5 py-2">
                     {training.info ? training.info : "‎"}
                 </p>
                 <div className="flex w-full items-center justify-between pl-5 pr-4">
