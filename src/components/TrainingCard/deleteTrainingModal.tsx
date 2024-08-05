@@ -1,7 +1,7 @@
 import { UpdateContext } from "@/app/trainings/page";
 import { generateDateString } from "@/utils/dateHelper";
-import { getCookie } from "cookies-next";
 import { Dispatch, SetStateAction, useContext } from "react";
+import deleteTraining from "@/utils/api/deleteTraining";
 
 export default function DeleteTrainingModal(props: {
     date: Date;
@@ -13,22 +13,14 @@ export default function DeleteTrainingModal(props: {
 
     async function handleDelete() {
         try {
-            const response = await fetch(`/api/trainings/${props.trainingId}`, {
-                method: "DELETE",
-                headers: {
-                    Authorization: `Bearer ${getCookie("token")}`,
-                },
-            });
-            if (response.status != 200) {
-                throw new Error();
+            await deleteTraining(props.trainingId);
+            if (updatePage != null) {
+                updatePage((a) => !a);
             }
         } catch (err) {
             alert("Nepovedlo se odstranit trénink 😔");
         } finally {
             props.setIsDeleteModal(false);
-            if (updatePage != null) {
-                updatePage((a) => !a);
-            }
         }
     }
 

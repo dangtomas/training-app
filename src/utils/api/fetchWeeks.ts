@@ -1,9 +1,11 @@
-export default async function fetchWeeks() {
-    const response = await fetch("/api/weeks");
+"use server";
 
-    if (response.status !== 200) {
-        throw new Error();
-    }
-    let weeks = await response.json();
-    return weeks;
+import Week from "@/models/Week";
+import dbConnect from "@/db/dbConnect";
+
+dbConnect();
+
+export default async function fetchWeeks() {
+    const weeks = await Week.find({});
+    return JSON.parse(JSON.stringify(weeks));
 }

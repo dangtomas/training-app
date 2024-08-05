@@ -21,51 +21,35 @@ export default function TrainingCard(training: Training) {
     );
     const [update, setUpdate] = useState(false);
     const [isDeleteModal, setIsDeleteModal] = useState(false);
+    const [showHostModal, setShowHostModal] = useState(false);
 
     useEffect(() => {
         fetchAttendance(training._id).then(async (result) => {
             setIsAttended(result.includes(getCookie("id")!));
-            const userAtendancePromises = result.map((id) => fetchUser(id));
+            const userAtendancePromises = result.map((id: string) =>
+                fetchUser(id),
+            );
             const userAttendance = await Promise.all(userAtendancePromises);
             setAttendanceList(userAttendance);
         });
     }, [update]);
 
     async function handleYes() {
-        const userId = getCookie("id")!;
-        let attendance = await fetchAttendance(training._id);
-        if (isAttended || attendance.includes(userId)) {
+        if (isAttended) {
             return;
         }
-        attendance.push(userId);
-        updateAttendance(attendance, training._id);
+        const userId = getCookie("id")!;
+        await updateAttendance(userId, training._id, true);
         setUpdate((a) => !a);
-
-        setTimeout(async () => {
-            attendance = await fetchAttendance(training._id);
-            if (!attendance.includes(userId)) {
-                alert("Zkus to znova, někde došlo k chybě");
-            }
-        }, 1000);
     }
 
     async function handleNo() {
-        const userId = getCookie("id")!;
-        let attendance = await fetchAttendance(training._id);
-        if (!isAttended || !attendance.includes(userId)) {
+        if (!isAttended) {
             return;
         }
-        const index = attendance.indexOf(userId);
-        attendance.splice(index, 1);
-        updateAttendance(attendance, training._id);
+        const userId = getCookie("id")!;
+        await updateAttendance(userId, training._id, false);
         setUpdate((a) => !a);
-
-        setTimeout(async () => {
-            attendance = await fetchAttendance(training._id);
-            if (attendance.includes(userId)) {
-                alert("Zkus to znova, někde došlo k chybě");
-            }
-        }, 1000);
     }
 
     return (
@@ -162,6 +146,12 @@ export default function TrainingCard(training: Training) {
                                 );
                             })
                         )}
+                        <button
+                            className="basis-full text-sky-400"
+                            onClick={() => setShowHostModal(true)}
+                        >
+                            Přidat hosta
+                        </button>
                     </div>
                 )}
             </div>

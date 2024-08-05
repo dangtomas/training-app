@@ -3,12 +3,15 @@
 import Training from "@/models/Training";
 
 export default async function updateAttendance(
-    attendance: string[],
+    userId: string,
     trainingId: string,
+    push: boolean,
 ) {
     await Training.findByIdAndUpdate(
-        { _id: trainingId },
-        { attendance },
+        trainingId,
+        push
+            ? { $push: { attendance: userId } }
+            : { $pull: { attendance: userId } },
         { new: true },
     );
 }
