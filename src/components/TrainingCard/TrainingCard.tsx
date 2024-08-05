@@ -11,7 +11,9 @@ import fetchAttendance from "@/utils/api/fetchAttendance";
 import updateAttendance from "@/utils/api/updateAttendance";
 import fetchUser from "@/utils/api/fetchUser";
 import PlayerCardSmall from "../PlayerCards/PlayerCardSmall";
+import HostCard from "../PlayerCards/HostCard";
 import DeleteTrainingModal from "./deleteTrainingModal";
+import AddHostModal from "./AddHostModal";
 
 export default function TrainingCard(training: Training) {
     const [attendanceList, setAttendanceList] = useState<User[]>([]);
@@ -21,7 +23,7 @@ export default function TrainingCard(training: Training) {
     );
     const [update, setUpdate] = useState(false);
     const [isDeleteModal, setIsDeleteModal] = useState(false);
-    const [showHostModal, setShowHostModal] = useState(false);
+    const [isAddHostModal, setIsAddHostModal] = useState(false);
 
     useEffect(() => {
         fetchAttendance(training._id).then(async (result) => {
@@ -62,6 +64,15 @@ export default function TrainingCard(training: Training) {
                     setIsDeleteModal={setIsDeleteModal}
                 />
             )}
+
+            {isAddHostModal && (
+                <AddHostModal
+                    trainingId={training._id}
+                    setIsAddHostModal={setIsAddHostModal}
+                    setUpdate={setUpdate}
+                />
+            )}
+
             <div className="box mt-3 items-start pb-2 pt-5">
                 <div className="flex w-full justify-between pb-1 pl-5 pr-4">
                     <h1 className="text-2xl font-bold">{training.activity}</h1>
@@ -138,17 +149,28 @@ export default function TrainingCard(training: Training) {
                                         className="basis-1/2 pb-3"
                                         key={user._id}
                                     >
-                                        <PlayerCardSmall
-                                            name={user.name}
-                                            profilePicSrc={user.profilePicSrc}
-                                        />
+                                        {user._id.startsWith("HOST") ? (
+                                            <HostCard
+                                                name={user.name}
+                                                hostId={user._id}
+                                                trainingId={training._id}
+                                                setUpdate={setUpdate}
+                                            />
+                                        ) : (
+                                            <PlayerCardSmall
+                                                name={user.name}
+                                                profilePicSrc={
+                                                    user.profilePicSrc
+                                                }
+                                            />
+                                        )}
                                     </div>
                                 );
                             })
                         )}
                         <button
-                            className="basis-full text-sky-400"
-                            onClick={() => setShowHostModal(true)}
+                            className="basis-full text-sm text-sky-400"
+                            onClick={() => setIsAddHostModal(true)}
                         >
                             Přidat hosta
                         </button>

@@ -26,7 +26,7 @@ export default function DeleteTrainingModal(props: {
 
     return (
         <div className="no-doc-scroll fixed z-10 flex h-full w-full items-center bg-[rgba(0,0,0,0.5)]">
-            <div className="box flex h-[160px] w-[360px] flex-col items-center">
+            <div className="box flex w-[360px] flex-col items-center py-5">
                 <h3 className="font-bold">Opravdu chceš smazat trénink?</h3>
                 <h3>{generateDateString(props.date, props.duration)}</h3>
                 <button
