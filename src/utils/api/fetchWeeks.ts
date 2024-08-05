@@ -6,6 +6,6 @@ import dbConnect from "@/db/dbConnect";
 dbConnect();
 
 export default async function fetchWeeks() {
-    const weeks = await Week.find({});
+    const weeks = await Week.find({}).sort("-from");
     return JSON.parse(JSON.stringify(weeks));
 }

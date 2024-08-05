@@ -16,6 +16,16 @@ export default async function Home() {
             to: "/trainings",
         },
         {
+            logo: "📊",
+            name: "TABULKY",
+            to: "/tables",
+        },
+        {
+            logo: "📅",
+            name: "TÝDNY",
+            to: "/weeks",
+        },
+        {
             logo: "👨‍👩‍👧‍👦",
             name: "ČLENOVÉ",
             to: "/members",
@@ -33,7 +43,7 @@ export default async function Home() {
     ];
 
     return (
-        <div className="mt-32 flex flex-col">
+        <div className="mt-24 flex flex-col">
             <div className="box">
                 <PlayerCardBig
                     name={user.name}

@@ -21,6 +21,7 @@ export const config = {
         "/prices",
         "/trainings",
         "/edit",
+        "/weeks",
         "/",
     ],
 };

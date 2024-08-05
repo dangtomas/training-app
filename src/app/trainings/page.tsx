@@ -8,6 +8,8 @@ import fetchTrainings from "@/utils/api/fetchTrainings";
 import TrainingCard from "@/components/TrainingCard/TrainingCard";
 import Link from "next/link";
 import { createContext } from "react";
+import Loading from "@/components/Loading";
+import { getDateInterval } from "@/utils/dateHelper";
 
 export const UpdateContext = createContext<Dispatch<
     SetStateAction<boolean>
@@ -50,9 +52,7 @@ export default function Trainings() {
     return (
         <UpdateContext.Provider value={setUpdate}>
             {loading ? (
-                <div className="box mt-[95px] h-[85vh] py-40 text-2xl">
-                    Načítání...
-                </div>
+                <Loading />
             ) : (
                 <div className="flex flex-col items-center overscroll-contain pb-3">
                     <div className="mt-[90px] flex w-[95vw] max-w-[600px] items-center">
@@ -74,14 +74,19 @@ export default function Trainings() {
                                         value={week._id}
                                         key={week._id}
                                     >
-                                        {week.name}
+                                        {week.name
+                                            ? `${week.name} (${getDateInterval(new Date(week.from), new Date(week.to))})`
+                                            : getDateInterval(
+                                                  week.from,
+                                                  week.to,
+                                              )}
                                     </option>
                                 );
                             })}
                         </select>
                     </div>
                     <Link
-                        href="/training-form"
+                        href="/trainings/form"
                         className="mt-2 w-[95vw] max-w-[600px] rounded-md border border-gray-400 bg-white py-1 text-center text-lg"
                     >
                         <i className="fa-solid fa-plus"></i> Vytvořit trénink

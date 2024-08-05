@@ -50,6 +50,13 @@ function numberToMonth(n: number) {
     }
 }
 
+export function getDateInterval(from: Date, to: Date) {
+    return (
+        `${from.getDate()}.${from.getMonth() + 1}-` +
+        `${to.getDate()}.${to.getMonth() + 1}.${to.getFullYear()}`
+    );
+}
+
 export function addDurationToDate(date: Date, duration: number): Date {
     const now = date.valueOf();
     return new Date(now + duration * 60 * 1000);

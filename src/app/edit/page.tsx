@@ -18,9 +18,11 @@ export default function Edit() {
     });
 
     useEffect(() => {
-        fetchUser(getCookie("id")!).then((result) => {
-            setUser(result);
-        });
+        setTimeout(() => {
+            fetchUser(getCookie("id")!).then((result) => {
+                setUser(result);
+            });
+        }, 300);
     }, []);
 
     return (

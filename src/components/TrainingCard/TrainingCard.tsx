@@ -85,7 +85,7 @@ export default function TrainingCard(training: Training) {
                             smazat
                         </button>
                         <Link
-                            href={`/training-form?trainingId=${training._id}`}
+                            href={`/trainings/form?trainingId=${training._id}`}
                             className="pr-2 text-sky-500"
                         >
                             upravit
@@ -118,7 +118,11 @@ export default function TrainingCard(training: Training) {
                         className="text-xl"
                         onClick={() => setShowAttendance((a) => !a)}
                     >
-                        <i className="fa-solid fa-circle-chevron-down"></i>
+                        {showAttendance ? (
+                            <i className="fa-solid fa-circle-chevron-up"></i>
+                        ) : (
+                            <i className="fa-solid fa-circle-chevron-down"></i>
+                        )}
                         <span className="pl-1 underline">účast</span>
                     </button>
                     <div>
