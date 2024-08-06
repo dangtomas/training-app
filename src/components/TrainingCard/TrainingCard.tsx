@@ -101,13 +101,7 @@ export default function TrainingCard(training: Training) {
                 </h3>
                 <h3 className="pl-5 text-lg">
                     Účast: {attendanceList.length} | Na hráče:{" "}
-                    {calculatePrice(
-                        training.duration,
-                        training.courts,
-                        training.courtPrice,
-                        training.isTrainer,
-                        attendanceList.length,
-                    )}
+                    {calculatePrice(training)}
                     ,-
                 </h3>
                 <p className="px-5 py-2">

@@ -19,6 +19,27 @@ function numberToDay(n: number): string {
     }
 }
 
+function numberToDayTable(n: number): string {
+    switch (n) {
+        case 1:
+            return "PO";
+        case 2:
+            return "ÚT";
+        case 3:
+            return "ST";
+        case 4:
+            return "ČT";
+        case 5:
+            return "PÁ";
+        case 6:
+            return "SO";
+        case 0:
+            return "NE";
+        default:
+            throw new Error("Invalid week number.");
+    }
+}
+
 function numberToMonth(n: number) {
     switch (n) {
         case 0:
@@ -75,4 +96,21 @@ export function generateDateString(date: Date, duration: number): string {
                 .toString()
                 .padStart(2, "0")}
         `;
+}
+
+export function generateDateStringTable(
+    date: Date,
+    duration: number,
+    activity: string,
+) {
+    return `${numberToDayTable(date.getDay())} 
+    ${date.getHours()}:${date.getMinutes().toString().padStart(2, "0")} - 
+    ${addDurationToDate(date, duration).getHours()}:${addDurationToDate(
+        date,
+        duration,
+    )
+        .getMinutes()
+        .toString()
+        .padStart(2, "0")}
+        ${activity}`;
 }

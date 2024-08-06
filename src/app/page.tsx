@@ -18,7 +18,7 @@ export default async function Home() {
         {
             logo: "📊",
             name: "TABULKY",
-            to: "/tables",
+            to: "/trainings",
         },
         {
             logo: "📅",

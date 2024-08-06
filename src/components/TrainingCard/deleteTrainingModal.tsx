@@ -25,7 +25,7 @@ export default function DeleteTrainingModal(props: {
     }
 
     return (
-        <div className="no-doc-scroll fixed flex h-full w-full items-center bg-[rgba(0,0,0,0.5)]">
+        <div className="no-doc-scroll fixed top-0 flex h-full w-full items-center bg-[rgba(0,0,0,0.5)]">
             <div className="box flex w-[360px] flex-col items-center py-5">
                 <h3 className="text-xl font-bold">
                     Opravdu chceš smazat trénink?

@@ -44,6 +44,7 @@ export default function Weeks() {
                         {weeks.map((w) => {
                             return (
                                 <WeekTab
+                                    key={w._id}
                                     _id={w._id}
                                     name={w.name}
                                     from={new Date(w.from)}

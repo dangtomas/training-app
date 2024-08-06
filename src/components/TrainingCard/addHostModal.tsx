@@ -7,7 +7,7 @@ export default function AddHostModal(props: {
     setUpdate: Dispatch<SetStateAction<boolean>>;
 }) {
     return (
-        <div className="no-doc-scroll fixed z-10 flex h-full w-full items-center bg-[rgba(0,0,0,0.5)]">
+        <div className="no-doc-scroll fixed top-0 flex h-full w-full items-center bg-[rgba(0,0,0,0.5)]">
             <div className="box flex w-[300px] flex-col items-center py-4">
                 <form
                     className="flex flex-col items-center"

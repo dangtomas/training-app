@@ -10,6 +10,7 @@ import Link from "next/link";
 import { createContext } from "react";
 import Loading from "@/components/Loading";
 import { getDateInterval } from "@/utils/dateHelper";
+import TrainingTable from "@/components/TrainingTable";
 
 export const UpdateContext = createContext<Dispatch<
     SetStateAction<boolean>
@@ -21,6 +22,12 @@ export default function Trainings() {
     const [weeks, setWeeks] = useState<Week[]>([]);
     const [currentWeek, setCurrentWeek] = useState<Week>();
     const [update, setUpdate] = useState(false);
+    const [showTables, setShowTables] = useState<boolean>();
+
+    useEffect(() => {
+        setShowTables(localStorage.getItem("tables") === "true");
+        console.log(localStorage.getItem("tables") === "true");
+    }, []);
 
     useEffect(() => {
         fetchWeeks().then((weeks: Week[]) => {
@@ -34,10 +41,10 @@ export default function Trainings() {
     }, []);
 
     useEffect(() => {
+        setLoading(true);
         if (!currentWeek) {
             return;
         }
-        setLoading(true);
         fetchTrainings(
             new Date(currentWeek.from),
             new Date(currentWeek.to),
@@ -47,15 +54,43 @@ export default function Trainings() {
                 setLoading(false);
             }, 300);
         });
-    }, [currentWeek, update]);
+    }, [currentWeek, update, showTables]);
 
     return (
         <UpdateContext.Provider value={setUpdate}>
             {loading ? (
                 <Loading />
             ) : (
-                <div className="flex flex-col items-center overscroll-contain pb-3">
-                    <div className="mt-[90px] flex w-[95vw] max-w-[600px] items-center">
+                <div className="mt-[90px] flex flex-col items-center overscroll-contain pb-3">
+                    <div className="mb-2 w-[95vw] max-w-[600px] rounded-md border border-gray-400 bg-white">
+                        <button
+                            className={`w-1/2 p-1 ${showTables ? "bg-black text-white" : ""} underline`}
+                            onClick={() => {
+                                if (showTables) {
+                                    return;
+                                }
+                                setLoading(true);
+                                localStorage.setItem("tables", "true");
+                                setShowTables(true);
+                            }}
+                        >
+                            Tabulky
+                        </button>
+                        <button
+                            className={`w-1/2 p-1 ${showTables ? "" : "bg-black text-white"} underline`}
+                            onClick={() => {
+                                if (!showTables) {
+                                    return;
+                                }
+                                setLoading(true);
+                                localStorage.setItem("tables", "false");
+                                setShowTables(false);
+                            }}
+                        >
+                            Tréninky
+                        </button>
+                    </div>
+                    <div className="flex w-[95vw] max-w-[600px] items-center">
                         <select
                             value={currentWeek?._id}
                             className="flex-1 rounded-md border border-gray-400 p-2 text-xl"
@@ -77,37 +112,44 @@ export default function Trainings() {
                                         {week.name
                                             ? `${week.name} (${getDateInterval(new Date(week.from), new Date(week.to))})`
                                             : getDateInterval(
-                                                  week.from,
-                                                  week.to,
+                                                  new Date(week.from),
+                                                  new Date(week.to),
                                               )}
                                     </option>
                                 );
                             })}
                         </select>
                     </div>
-                    <Link
-                        href="/trainings/form"
-                        className="mt-2 w-[95vw] max-w-[600px] rounded-md border border-gray-400 bg-white py-1 text-center text-lg"
-                    >
-                        <i className="fa-solid fa-plus"></i> Vytvořit trénink
-                    </Link>
-                    {trainings &&
-                        trainings.map((training) => {
-                            return (
-                                <TrainingCard
-                                    key={training._id}
-                                    _id={training._id}
-                                    activity={training.activity}
-                                    date={new Date(training.date)}
-                                    duration={training.duration}
-                                    isTrainer={training.isTrainer}
-                                    courts={training.courts}
-                                    courtPrice={training.courtPrice}
-                                    info={training.info}
-                                    attendance={training.attendance}
-                                />
-                            );
-                        })}
+                    {showTables ? (
+                        <TrainingTable trainings={trainings} />
+                    ) : (
+                        <>
+                            <Link
+                                href="/trainings/form"
+                                className="mt-2 w-[95vw] max-w-[600px] rounded-md border border-gray-400 bg-white py-1 text-center text-lg"
+                            >
+                                <i className="fa-solid fa-plus"></i> Vytvořit
+                                trénink
+                            </Link>
+                            {trainings &&
+                                trainings.map((training) => {
+                                    return (
+                                        <TrainingCard
+                                            key={training._id}
+                                            _id={training._id}
+                                            activity={training.activity}
+                                            date={new Date(training.date)}
+                                            duration={training.duration}
+                                            isTrainer={training.isTrainer}
+                                            courts={training.courts}
+                                            courtPrice={training.courtPrice}
+                                            info={training.info}
+                                            attendance={training.attendance}
+                                        />
+                                    );
+                                })}
+                        </>
+                    )}
                 </div>
             )}
         </UpdateContext.Provider>
