@@ -1,37 +1,40 @@
-import { UpdateContext } from "@/app/trainings/page";
-import { generateDateString } from "@/utils/dateHelper";
+import { UpdateContext } from "@/app/weeks/page";
 import { Dispatch, SetStateAction, useContext } from "react";
-import deleteTraining from "@/utils/api/deleteTraining";
+import deleteWeek from "@/utils/api/deleteWeek";
+import { getDateInterval } from "@/utils/dateHelper";
 
-export default function DeleteTrainingModal(props: {
-    date: Date;
-    duration: number;
-    trainingId: string;
+export default function DeleteWeekModal(props: {
+    name: string;
+    from: Date;
+    to: Date;
+    weekId: string;
     setIsDeleteModal: Dispatch<SetStateAction<boolean>>;
 }) {
     const updatePage = useContext(UpdateContext);
 
     async function handleDelete() {
         try {
-            await deleteTraining(props.trainingId);
+            await deleteWeek(props.weekId);
             if (updatePage != null) {
                 updatePage((a) => !a);
             }
         } catch (err) {
-            alert("Nepovedlo se odstranit trénink 😔");
+            alert("Nepovedlo se odstranit týden 😔");
         } finally {
             props.setIsDeleteModal(false);
         }
     }
 
     return (
-        <div className="no-doc-scroll fixed flex h-full w-full items-center bg-[rgba(0,0,0,0.5)]">
-            <div className="box flex w-[360px] flex-col items-center py-5">
+        <div className="no-doc-scroll fixed bottom-0 flex h-screen w-full items-center bg-[rgba(0,0,0,0.5)]">
+            <div className="box flex w-[360px] flex-col py-5">
                 <h3 className="text-xl font-bold">
-                    Opravdu chceš smazat trénink?
+                    Opravdu chceš smazat týden?
                 </h3>
-                <h3 className="text-xl">
-                    {generateDateString(props.date, props.duration)}
+                <h3 className="pb-1 pt-0.5 text-xl">
+                    {props.name ? props.name + " (" : ""}
+                    {getDateInterval(props.from, props.to)}
+                    {props.name ? ")" : ""}
                 </h3>
                 <button
                     type="button"
