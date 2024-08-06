@@ -43,7 +43,7 @@ export default async function Home() {
     ];
 
     return (
-        <div className="mt-24 flex flex-col">
+        <div className="mt-32 flex flex-col">
             <div className="box">
                 <PlayerCardBig
                     name={user.name}

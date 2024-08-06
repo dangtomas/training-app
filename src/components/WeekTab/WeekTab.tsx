@@ -60,7 +60,10 @@ export default function WeekTab(week: Week) {
                             >
                                 Smazat
                             </button>
-                            <Link className="pl-2 text-sky-500" href="/">
+                            <Link
+                                className="pl-2 text-sky-500"
+                                href={`/weeks/form?weekId=${week._id}`}
+                            >
                                 Upravit
                             </Link>
                         </div>

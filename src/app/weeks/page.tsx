@@ -35,7 +35,7 @@ export default function Weeks() {
             ) : (
                 <div className="mt-[85px] flex flex-col items-center">
                     <Link
-                        href="/training-form"
+                        href="/weeks/form"
                         className="mb-2 w-[95vw] max-w-[600px] rounded-md border border-gray-400 bg-white py-1 text-center text-lg"
                     >
                         <i className="fa-solid fa-plus"></i> Přidat týden

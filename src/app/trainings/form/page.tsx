@@ -124,7 +124,7 @@ export default async function TrainingForm({
             >
                 {training ? "Upravit" : "Vytvořit"}
             </button>
-            <CancelFormLink />
+            <CancelFormLink href="/trainings" />
         </form>
     );
 }

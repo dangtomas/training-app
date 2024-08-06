@@ -3,8 +3,10 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header/Header";
 import Script from "next/script";
+import dbConnect from "@/db/dbConnect";
 
 const inter = Inter({ subsets: ["latin"] });
+dbConnect();
 
 export const metadata: Metadata = {
     title: "Create Next App",
