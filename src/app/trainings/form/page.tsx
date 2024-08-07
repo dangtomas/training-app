@@ -10,7 +10,7 @@ export default async function TrainingForm({
     searchParams?: { [key: string]: string | undefined };
 }) {
     const now = new Date();
-    now.setHours(16, 30);
+    now.setUTCHours(16 - getTimezoneOffset("Europe/Prague") / 60, 30);
     const trainingId = searchParams?.trainingId;
     const training = await Training.findById(trainingId);
 
