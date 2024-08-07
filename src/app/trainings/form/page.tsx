@@ -2,6 +2,7 @@ import TrainingType from "@/types/Training";
 import Training from "@/models/Training";
 import modifyTrainings from "@/utils/api/modifyTrainings";
 import CancelFormLink from "@/components/cancelFormLink";
+import { getTimezoneOffset } from "@/utils/dateHelper";
 
 export default async function TrainingForm({
     searchParams,
@@ -66,8 +67,8 @@ export default async function TrainingForm({
                 name="date"
                 required
                 defaultValue={new Date(
-                    defaults.date.getTime() -
-                        new Date().getTimezoneOffset() * 60 * 1000,
+                    defaults.date.getTime() +
+                        getTimezoneOffset("Europe/Prague") * 60 * 1000,
                 )
                     .toISOString()
                     .substring(0, 16)}

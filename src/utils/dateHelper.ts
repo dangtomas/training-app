@@ -114,3 +114,14 @@ export function generateDateStringTable(
         .padStart(2, "0")}
         ${activity}`;
 }
+
+export function getTimezoneOffset(timeZone: string) {
+    const str = new Date().toLocaleString("en", {
+        timeZone,
+        timeZoneName: "longOffset",
+    });
+    const [_, h, m] = str.match(/([+-]\d+):(\d+)$/) || [, "+00", "00"];
+    const hour = Number(h);
+    const minutes = Number(m);
+    return hour * 60 + (hour > 0 ? +minutes : -minutes);
+}
