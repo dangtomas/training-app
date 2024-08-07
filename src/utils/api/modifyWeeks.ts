@@ -10,8 +10,7 @@ export default async function modifyWeeks(formData: FormData) {
     const user = await User.findById(userId);
 
     if (!user.isAdmin) {
-        alert("Nepovedlo se upravit týdny 😔");
-        throw new Error("Unauthorized delete.");
+        throw new Error("Unauthorized operation.");
     }
 
     const fromDate = new Date(formData.get("from") + "T00:00:00Z");

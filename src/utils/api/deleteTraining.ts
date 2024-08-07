@@ -9,8 +9,7 @@ export default async function deleteTraining(trainingId: string) {
     const user = await User.findById(userId);
 
     if (!user.isAdmin) {
-        alert("Nepovedlo se odstranit trénink 😔");
-        throw new Error("Unauthorized delete.");
+        throw new Error("Unauthorized operation.");
     }
 
     await Training.findByIdAndDelete(trainingId);

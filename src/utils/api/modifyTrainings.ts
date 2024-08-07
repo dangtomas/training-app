@@ -10,8 +10,7 @@ export default async function modifyTrainings(formData: FormData) {
     const user = await User.findById(userId);
 
     if (!user.isAdmin) {
-        alert("Nepovedlo se upravit tréninky");
-        throw new Error("Unauthorized delete.");
+        throw new Error("Unauthorized operation.");
     }
 
     let trainingData = {
