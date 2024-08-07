@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { getCookie } from "cookies-next";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Training from "@/types/Training";
 import User from "@/types/User";
 import { generateDateString } from "@/utils/dateHelper";
@@ -12,7 +12,7 @@ import updateAttendance from "@/utils/api/updateAttendance";
 import fetchUser from "@/utils/api/fetchUser";
 import PlayerCardSmall from "../PlayerCards/PlayerCardSmall";
 import HostCard from "../PlayerCards/HostCard";
-import DeleteTrainingModal from "./deleteTrainingModal";
+import DeleteTrainingModal from "./DeleteTrainingModal";
 import AddHostModal from "./AddHostModal";
 
 export default function TrainingCard(training: Training) {
