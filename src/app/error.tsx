@@ -14,11 +14,14 @@ export default function Error({
 
     return (
         <div className="box mt-44 py-24 text-2xl">
-            Někde došlo k chybě, zkus se{" "}
-            <Link href="/login" className="text-sky-500 underline">
-                odhlásit
-            </Link>{" "}
-            a přihlásit
+            <h2>
+                Někde došlo k chybě, zkus se{" "}
+                <Link href="/login" className="text-sky-500 underline">
+                    odhlásit
+                </Link>{" "}
+                a přihlásit
+            </h2>
+            <h3 className="text-red-400">Error: {error.message}</h3>
         </div>
     );
 }

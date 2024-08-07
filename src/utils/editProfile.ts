@@ -8,8 +8,13 @@ export default async function editProfile(formData: FormData) {
         password: formData.get("password"),
     };
 
+    const userId = cookies().get("id")?.value;
+    if (userId === "66b3e5534bbc76f3225afb05") {
+        throw new Error("Unauthorized operation.");
+    }
+
     const user = await User.findByIdAndUpdate(
-        cookies().get("id")?.value,
+        userId,
         data.password ? data : { name: data.name },
         { new: true },
     );

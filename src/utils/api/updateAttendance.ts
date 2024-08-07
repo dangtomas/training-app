@@ -7,6 +7,11 @@ export default async function updateAttendance(
     trainingId: string,
     push: boolean,
 ) {
+    if (userId === "66b3e5534bbc76f3225afb05") {
+        //host
+        return;
+    }
+
     await Training.findByIdAndUpdate(
         trainingId,
         push

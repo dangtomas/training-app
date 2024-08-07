@@ -9,7 +9,8 @@ export default async function fetchMembersWithHosts(trainings: Training[]) {
     users = users.filter((u) => {
         return (
             u._id.toString() !== "669e2e4da78779b9287aaafd" &&
-            u._id.toString() !== "668d082fbb6894b643abeb6b"
+            u._id.toString() !== "668d082fbb6894b643abeb6b" &&
+            u._id.toString() !== "66b3e5534bbc76f3225afb05"
         );
     });
     await addHosts(trainings, users);

@@ -29,9 +29,14 @@ export default function Edit() {
         <form
             className="box mt-24 items-start"
             action={async (formData: FormData) => {
-                await editProfile(formData);
-                setMessage("Úspěšně změněno 💪✅");
-                passwordRef.current!.value = "";
+                try {
+                    await editProfile(formData);
+                    setMessage("Úspěšně změněno 💪✅");
+                } catch {
+                    setMessage("Někde došlo k chybě ❌🙁");
+                } finally {
+                    passwordRef.current!.value = "";
+                }
             }}
         >
             {user.name === "" ? (

@@ -13,7 +13,8 @@ export default async function Members() {
     users = users.filter(
         (user) =>
             !user._id.equals(coach._id) &&
-            !user._id.equals("669e2e4da78779b9287aaafd"),
+            !user._id.equals("669e2e4da78779b9287aaafd") &&
+            !user._id.equals("66b3e5534bbc76f3225afb05"),
     );
 
     return (
