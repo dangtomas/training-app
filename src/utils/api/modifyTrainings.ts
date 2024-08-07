@@ -2,8 +2,18 @@
 import Training from "@/models/Training";
 import { redirect } from "next/navigation";
 import { getTimezoneOffset } from "../dateHelper";
+import { cookies } from "next/headers";
+import User from "@/models/User";
 
 export default async function modifyTrainings(formData: FormData) {
+    const userId = cookies().get("id")?.value;
+    const user = await User.findById(userId);
+
+    if (!user.isAdmin) {
+        alert("Nepovedlo se upravit tréninky");
+        throw new Error("Unauthorized delete.");
+    }
+
     let trainingData = {
         activity: formData.get("activity"),
         duration: formData.get("duration"),
