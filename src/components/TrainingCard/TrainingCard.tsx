@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { getCookie } from "cookies-next";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Training from "@/types/Training";
 import User from "@/types/User";
 import { generateDateString } from "@/utils/dateHelper";
@@ -101,7 +101,9 @@ export default function TrainingCard(training: Training) {
                 </h3>
                 <h3 className="pl-5 text-lg">
                     Účast: {attendanceList.length} | Na hráče:{" "}
-                    {calculatePrice(training)}
+                    {attendanceList.length === 0
+                        ? 0
+                        : calculatePrice(training) / attendanceList.length}
                     ,-
                 </h3>
                 <p className="px-5 py-2">

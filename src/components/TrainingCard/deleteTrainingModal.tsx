@@ -1,4 +1,4 @@
-import { UpdateContext } from "@/app/trainings/page";
+import UpdateContext from "@/utils/updateContext";
 import { generateDateString } from "@/utils/dateHelper";
 import { Dispatch, SetStateAction, useContext } from "react";
 import deleteTraining from "@/utils/api/deleteTraining";
@@ -14,9 +14,7 @@ export default function DeleteTrainingModal(props: {
     async function handleDelete() {
         try {
             await deleteTraining(props.trainingId);
-            if (updatePage != null) {
-                updatePage((a) => !a);
-            }
+            updatePage();
         } catch (err) {
             alert("Nepovedlo se odstranit trénink 😔");
         } finally {

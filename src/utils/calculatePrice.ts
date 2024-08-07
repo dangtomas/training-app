@@ -1,13 +1,17 @@
 import Training from "@/types/Training";
 
 export default function calculatePrice(training: Training) {
-    const STANDA = training.isTrainer ? 500 : 0;
-    if (training.attendance.length === 0) {
+    return calculateCourtPrice(training) + calculateTrainerPrice(training);
+}
+
+export function calculateCourtPrice(training: Training) {
+    return (training.duration / 60) * training.courtPrice * training.courts;
+}
+
+export function calculateTrainerPrice(training: Training) {
+    const trainerHourly = training.isTrainer ? 500 : 0;
+    if (!training.isTrainer) {
         return 0;
     }
-    return Math.ceil(
-        ((training.duration / 60) *
-            (STANDA + training.courtPrice * training.courts)) /
-            training.attendance.length,
-    );
+    return (training.duration / 60) * trainerHourly;
 }

@@ -1,0 +1,9 @@
+{
+    "name": "training-app",
+    "short_name": "Tréninky",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#def4d7",
+    "theme-color": "#def4d7",
+    "description": "badminton club login app"
+}

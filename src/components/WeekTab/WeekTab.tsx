@@ -40,11 +40,21 @@ export default function WeekTab(week: Week) {
                 {showMore && (
                     <div className="flex items-center justify-between pt-2 text-lg text-gray-600">
                         <div>
-                            <button className="underline">Tabulka</button>
+                            <button
+                                onClick={() => {
+                                    localStorage.setItem("weekId", week._id);
+                                    localStorage.setItem("tables", "true");
+                                    router.push("/trainings");
+                                }}
+                                className="underline"
+                            >
+                                Tabulka
+                            </button>
                             <button
                                 className="ml-2 underline"
                                 onClick={() => {
                                     localStorage.setItem("weekId", week._id);
+                                    localStorage.setItem("tables", "false");
                                     router.push("/trainings");
                                 }}
                             >

@@ -1,4 +1,4 @@
-import { UpdateContext } from "@/app/weeks/page";
+import UpdateContext from "@/utils/updateContext";
 import { Dispatch, SetStateAction, useContext } from "react";
 import deleteWeek from "@/utils/api/deleteWeek";
 import { getDateInterval } from "@/utils/dateHelper";
@@ -16,7 +16,7 @@ export default function DeleteWeekModal(props: {
         try {
             await deleteWeek(props.weekId);
             if (updatePage != null) {
-                updatePage((a) => !a);
+                updatePage();
             }
         } catch (err) {
             alert("Nepovedlo se odstranit týden 😔");

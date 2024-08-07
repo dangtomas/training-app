@@ -6,6 +6,12 @@ import Training from "@/types/Training";
 
 export default async function fetchMembersWithHosts(trainings: Training[]) {
     let users = await User.find({}).sort("name");
+    users = users.filter((u) => {
+        return (
+            u._id.toString() !== "669e2e4da78779b9287aaafd" &&
+            u._id.toString() !== "668d082fbb6894b643abeb6b"
+        );
+    });
     await addHosts(trainings, users);
     return JSON.parse(JSON.stringify(users));
 }

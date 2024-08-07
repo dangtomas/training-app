@@ -8,13 +8,10 @@ import fetchTrainings from "@/utils/api/fetchTrainings";
 import TrainingCard from "@/components/TrainingCard/TrainingCard";
 import Link from "next/link";
 import { createContext } from "react";
+import UpdateContext from "@/utils/updateContext";
 import Loading from "@/components/Loading";
 import { getDateInterval } from "@/utils/dateHelper";
 import TrainingTable from "@/components/TrainingTable";
-
-export const UpdateContext = createContext<Dispatch<
-    SetStateAction<boolean>
-> | null>(null);
 
 export default function Trainings() {
     const [trainings, setTrainings] = useState<Training[]>([]);
@@ -56,8 +53,12 @@ export default function Trainings() {
         });
     }, [currentWeek, update, showTables]);
 
+    function updatePage() {
+        setUpdate((a) => !a);
+    }
+
     return (
-        <UpdateContext.Provider value={setUpdate}>
+        <UpdateContext.Provider value={updatePage}>
             {loading ? (
                 <Loading />
             ) : (

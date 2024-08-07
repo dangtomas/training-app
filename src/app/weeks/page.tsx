@@ -1,36 +1,34 @@
 "use client";
 import WeekTab from "@/components/WeekTab/WeekTab";
-import {
-    createContext,
-    Dispatch,
-    SetStateAction,
-    useEffect,
-    useState,
-} from "react";
+import { createContext, useEffect, useState } from "react";
 import fetchWeeks from "@/utils/api/fetchWeeks";
 import Week from "@/types/Week";
 import Loading from "@/components/Loading";
 import Link from "next/link";
-
-export const UpdateContext = createContext<Dispatch<
-    SetStateAction<boolean>
-> | null>(null);
+import UpdateContext from "@/utils/updateContext";
 
 export default function Weeks() {
     const [weeks, setWeeks] = useState<Week[]>([]);
     const [update, setUpdate] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        setLoading(true);
+        fetchWeeks().then((result) => {
+            setWeeks(result);
+        });
         setTimeout(() => {
-            fetchWeeks().then((result) => {
-                setWeeks(result);
-            });
+            setLoading(false);
         }, 300);
     }, [update]);
 
+    function updatePage() {
+        setUpdate((a) => !a);
+    }
+
     return (
-        <UpdateContext.Provider value={setUpdate}>
-            {weeks.length === 0 ? (
+        <UpdateContext.Provider value={updatePage}>
+            {loading ? (
                 <Loading />
             ) : (
                 <div className="mt-[85px] flex flex-col items-center">
