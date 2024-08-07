@@ -30,10 +30,10 @@ export default function Login() {
                 throw new Error();
             }
 
-            const data = await response.json();
+            router.refresh();
             setMessage("Úspěšné přihlášení, počkej chvíli ✅🥳");
             setTimeout(() => {
-                router.push("/trainings");
+                router.push("/");
             }, 500);
         } catch (err) {
             setMessage("Špatné údaje, zkus to znova ❌🙁");
