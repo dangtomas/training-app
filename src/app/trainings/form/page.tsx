@@ -61,7 +61,7 @@ export default async function TrainingForm({
 
             <label className="py-1 text-lg font-bold">Datum a čas</label>
             <input
-                className="mb-1 w-full rounded-sm border border-gray-400 px-2 py-0.5"
+                className="mb-1 w-full appearance-none rounded-sm border border-gray-400 bg-white px-2 py-0.5"
                 type="datetime-local"
                 name="date"
                 required
