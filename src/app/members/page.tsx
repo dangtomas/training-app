@@ -3,6 +3,8 @@ import dbConnect from "@/db/dbConnect";
 import PlayerCardBig from "@/components/PlayerCards/PlayerCardBig";
 import PlayerCardSmall from "@/components/PlayerCards/PlayerCardSmall";
 
+export const dynamic = "force-dynamic";
+
 dbConnect();
 
 export default async function Members() {
