@@ -31,7 +31,9 @@ export default function Login() {
 
             const data = await response.json();
             setMessage("Úspěšné přihlášení, počkej chvíli ✅🥳");
-            router.push("/");
+            setTimeout(() => {
+                router.push("/");
+            }, 500);
         } catch (err) {
             setMessage("Špatné údaje, zkus to znova ❌🙁");
         }
