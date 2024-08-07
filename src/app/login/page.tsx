@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 import deleteCookies from "./deleteCookies";
+export const dynamic = "force-static";
 
 export default function Login() {
     const [username, setUsername] = useState("");
@@ -32,7 +33,7 @@ export default function Login() {
             const data = await response.json();
             setMessage("Úspěšné přihlášení, počkej chvíli ✅🥳");
             setTimeout(() => {
-                router.push("/");
+                router.push("/trainings");
             }, 500);
         } catch (err) {
             setMessage("Špatné údaje, zkus to znova ❌🙁");

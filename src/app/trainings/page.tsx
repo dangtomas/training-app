@@ -1,13 +1,12 @@
 "use client";
 
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Training from "@/types/Training";
 import Week from "@/types/Week";
 import fetchWeeks from "../../utils/api/fetchWeeks";
 import fetchTrainings from "@/utils/api/fetchTrainings";
 import TrainingCard from "@/components/TrainingCard/TrainingCard";
 import Link from "next/link";
-import { createContext } from "react";
 import UpdateContext from "@/utils/updateContext";
 import Loading from "@/components/Loading";
 import { getDateInterval } from "@/utils/dateHelper";

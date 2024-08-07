@@ -1,14 +1,15 @@
-import User from "@/models/User";
-import { cookies } from "next/headers";
+"use client";
+
+import { getCookie } from "cookies-next";
 import PlayerCardBig from "@/components/PlayerCards/PlayerCardBig";
-import dbConnect from "@/db/dbConnect";
 import MenuTab from "@/components/MenuTab";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import fetchUser from "@/utils/api/fetchUser";
+import User from "@/types/User";
+import Loading from "@/components/Loading";
 
-dbConnect();
-
-export default async function Home() {
-    const user = await User.findById(cookies().get("id")?.value);
+export default function Dashboard() {
     const menuItems = [
         {
             logo: "🏋️‍♂️",
@@ -41,13 +42,21 @@ export default async function Home() {
             to: "/edit",
         },
     ];
+    const [user, setUser] = useState<User>();
+    useEffect(() => {
+        fetchUser(getCookie("id")!).then((result) => {
+            setUser(result);
+        });
+    }, []);
 
-    return (
+    return !user ? (
+        <Loading />
+    ) : (
         <div className="mt-32 flex flex-col">
             <div className="box">
                 <PlayerCardBig
-                    name={user.name}
-                    profilePicSrc={user.profilePicSrc}
+                    name={user!.name}
+                    profilePicSrc={user!.profilePicSrc}
                 />
                 {menuItems.map((menuItem) => {
                     return (
