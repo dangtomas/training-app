@@ -3,12 +3,16 @@ import Week from "@/models/Week";
 import { redirect } from "next/navigation";
 
 export default async function modifyWeeks(formData: FormData) {
-    const fromDateString = formData.get("from") + "T00:00:00";
-    const toDateString = formData.get("to") + "T23:59:59";
+    const fromDate = new Date(formData.get("from") + "T00:00:00Z");
+    const toDate = new Date(formData.get("to") + "T23:59:59Z");
     let weekData = {
         name: formData.get("name"),
-        from: new Date(fromDateString),
-        to: new Date(toDateString),
+        from: new Date(
+            fromDate.getTime() + new Date().getTimezoneOffset() * 60 * 1000,
+        ),
+        to: new Date(
+            toDate.getTime() + new Date().getTimezoneOffset() * 60 * 1000,
+        ),
     };
 
     const weekId = formData.get("weekId");

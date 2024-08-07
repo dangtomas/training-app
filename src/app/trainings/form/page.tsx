@@ -12,13 +12,11 @@ export default async function TrainingForm({
     now.setHours(16, 30);
     const trainingId = searchParams?.trainingId;
     const training = await Training.findById(trainingId);
+
     let defaults: TrainingType = {
         _id: training?.id || "",
         activity: training?.activity || "badminton",
-        date: new Date(
-            (training?.date || now).getTime() -
-                new Date().getTimezoneOffset() * 60000,
-        ),
+        date: training?.date || now,
         duration: training?.duration || 90,
         isTrainer: training ? training.isTrainer : true,
         courts: training ? training.courts : 2,
@@ -67,7 +65,12 @@ export default async function TrainingForm({
                 type="datetime-local"
                 name="date"
                 required
-                defaultValue={defaults.date.toISOString().substring(0, 16)}
+                defaultValue={new Date(
+                    defaults.date.getTime() -
+                        new Date().getTimezoneOffset() * 60 * 1000,
+                )
+                    .toISOString()
+                    .substring(0, 16)}
             />
 
             <label className="py-1 text-lg font-bold">Kurty</label>

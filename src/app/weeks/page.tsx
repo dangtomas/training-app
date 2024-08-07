@@ -1,6 +1,6 @@
 "use client";
 import WeekTab from "@/components/WeekTab/WeekTab";
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import fetchWeeks from "@/utils/api/fetchWeeks";
 import Week from "@/types/Week";
 import Loading from "@/components/Loading";
