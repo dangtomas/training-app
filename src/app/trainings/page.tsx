@@ -94,7 +94,7 @@ export default function Trainings() {
                     <div className="flex w-[95vw] max-w-[600px] items-center">
                         <select
                             value={currentWeek?._id}
-                            className="flex-1 rounded-md border border-gray-400 p-2 text-xl"
+                            className="flex-1 rounded-md border border-gray-400 bg-white p-2 text-xl"
                             onChange={(e) => {
                                 localStorage.setItem("weekId", e.target.value);
                                 setLoading(true);
