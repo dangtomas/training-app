@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header/Header";
@@ -7,6 +7,10 @@ import dbConnect from "@/db/dbConnect";
 
 const inter = Inter({ subsets: ["latin"] });
 dbConnect();
+
+export const viewport: Viewport = {
+    themeColor: "#def4d7",
+};
 
 export const metadata: Metadata = {
     title: "Tréninky",

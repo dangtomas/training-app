@@ -45,7 +45,7 @@ export default async function WeekForm({
 
             <label className="py-1 text-lg font-bold">Od:</label>
             <input
-                className="mb-1 w-full rounded-sm border border-gray-400 px-2 py-0.5"
+                className="mb-1 w-full appearance-none rounded-sm border border-gray-400 bg-white px-2 py-0.5"
                 type="date"
                 name="from"
                 required
@@ -54,7 +54,7 @@ export default async function WeekForm({
 
             <label className="py-1 text-lg font-bold">Do:</label>
             <input
-                className="mb-1 w-full rounded-sm border border-gray-400 px-2 py-0.5"
+                className="mb-1 w-full appearance-none rounded-sm border border-gray-400 bg-white px-2 py-0.5"
                 type="date"
                 name="to"
                 required
