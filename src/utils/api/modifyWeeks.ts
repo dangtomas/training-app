@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 export default async function modifyWeeks(formData: FormData) {
     const fromDate = new Date(formData.get("from") + "T00:00:00Z");
     const toDate = new Date(formData.get("to") + "T23:59:59Z");
+    console.log(new Date().getTimezoneOffset());
     let weekData = {
         name: formData.get("name"),
         from: new Date(
