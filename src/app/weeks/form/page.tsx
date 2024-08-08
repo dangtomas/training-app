@@ -2,6 +2,7 @@ import Week from "@/models/Week";
 import CancelFormLink from "@/components/cancelFormLink";
 import modifyWeeks from "@/utils/api/modifyWeeks";
 import WeekType from "@/types/Week";
+import { getTimezoneOffset } from "@/utils/dateHelper";
 
 export default async function WeekForm({
     searchParams,
@@ -10,8 +11,6 @@ export default async function WeekForm({
 }) {
     const weekId = searchParams?.weekId;
     const week = await Week.findById(weekId);
-
-    console.log();
 
     let defaults: WeekType = {
         name: week?.name || "",
@@ -49,7 +48,18 @@ export default async function WeekForm({
                 type="date"
                 name="from"
                 required
-                defaultValue={defaults.from?.toISOString().substring(0, 10)}
+                defaultValue={
+                    defaults.from
+                        ? new Date(
+                              defaults.from.getTime() +
+                                  getTimezoneOffset("Europe/Prague") *
+                                      60 *
+                                      1000,
+                          )
+                              .toISOString()
+                              .substring(0, 10)
+                        : undefined
+                }
             />
 
             <label className="py-1 text-lg font-bold">Do:</label>
@@ -60,6 +70,33 @@ export default async function WeekForm({
                 required
                 defaultValue={defaults.to?.toISOString().substring(0, 10)}
             />
+
+            <label className="py-1 text-lg font-bold">Přidat tréninky?</label>
+            <div className="flex items-center">
+                <input
+                    className="h-4 w-4"
+                    type="radio"
+                    name="addTrainings"
+                    value="standard"
+                />
+                <label className="pl-2">Normální</label>
+                <input
+                    className="ml-5 h-4 w-4"
+                    type="radio"
+                    name="addTrainings"
+                    value="holiday"
+                />
+                <label className="pl-2">Prázdniny</label>
+                <input
+                    className="ml-5 h-4 w-4"
+                    type="radio"
+                    name="addTrainings"
+                    value="none"
+                    defaultChecked={true}
+                />
+                <label className="pl-2">Žádné</label>
+            </div>
+
             <button
                 className="mb-3 mt-6 w-full rounded-sm bg-black p-2 text-white hover:bg-stone-800"
                 type="submit"

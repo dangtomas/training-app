@@ -1,9 +1,11 @@
 "use server";
-import Week from "@/models/Week";
-import { redirect } from "next/navigation";
-import { getTimezoneOffset } from "../dateHelper";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import Week from "@/models/Week";
 import User from "@/models/User";
+import Training from "@/models/Training";
+import { getTimezoneOffset } from "../dateHelper";
+import { createTrainingWeek } from "../createTrainingWeek";
 
 export default async function modifyWeeks(formData: FormData) {
     const userId = cookies().get("id")?.value;
@@ -24,6 +26,15 @@ export default async function modifyWeeks(formData: FormData) {
             toDate.getTime() - getTimezoneOffset("Europe/Prague") * 60 * 1000,
         ),
     };
+
+    const addTrainings = formData.get("addTrainings")?.toString();
+    if (addTrainings !== "none") {
+        createTrainingWeek(weekData.from, addTrainings!).forEach(
+            async (trainingData) => {
+                await Training.create(trainingData);
+            },
+        );
+    }
 
     const weekId = formData.get("weekId");
     if (weekId) {
