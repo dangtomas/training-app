@@ -1,13 +1,13 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import Link from "next/link";
 import { getCookie } from "cookies-next";
 import PlayerCardBig from "@/components/PlayerCards/PlayerCardBig";
 import MenuTab from "@/components/MenuTab";
-import Link from "next/link";
-import { useEffect, useState } from "react";
+import Loading from "@/components/Loading";
 import fetchUser from "@/utils/api/fetchUser";
 import User from "@/types/User";
-import Loading from "@/components/Loading";
 
 export default function Dashboard() {
     const menuItems = [

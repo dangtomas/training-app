@@ -8,21 +8,24 @@ export async function GET(_: Request, { params }: { params: { id: string } }) {
     return Response.json(training, { status: 200 });
 }
 
-export async function PATCH(req: Request, { params }: { params: { id: string } }) {
+export async function PATCH(
+    req: Request,
+    { params }: { params: { id: string } },
+) {
     const reqBody = await req.json();
     const training = await Training.findByIdAndUpdate(
         { _id: params.id },
         reqBody,
-        { new: true }
-    )
+        { new: true },
+    );
 
-    return Response.json(training, { status: 200 })
+    return Response.json(training, { status: 200 });
 }
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
-    if (!req.headers.get("isAdmin")) {
-        return Response.json({ error: "Unauthorized" }, { status: 401 })
-    }
+export async function DELETE(
+    req: Request,
+    { params }: { params: { id: string } },
+) {
     await Training.findByIdAndDelete(params.id);
     return Response.json({}, { status: 200 });
 }

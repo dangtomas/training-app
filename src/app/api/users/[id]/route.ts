@@ -26,9 +26,6 @@ export async function DELETE(
     req: Request,
     { params }: { params: { id: string } },
 ) {
-    if (!req.headers.get("isAdmin")) {
-        return Response.json({ error: "Unauthorized" }, { status: 401 });
-    }
     await User.findByIdAndDelete(params.id);
     return Response.json({}, { status: 200 });
 }

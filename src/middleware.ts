@@ -6,9 +6,9 @@ export function middleware(req: NextRequest) {
     const path = req.nextUrl.pathname;
     const token = cookies().get("token")?.value;
 
-    if (req.method !== "GET" && path.startsWith("/api")) {
-        return APIauthenticate(headers().get("Authorization"));
-    } else if (!path.startsWith("/api") && (!token || !isValidToken(token))) {
+    if (path.startsWith("/api")) {
+        return APIauthenticate(headers().get("Authorization"), req.method);
+    } else if (!token || !isValidToken(token)) {
         return NextResponse.redirect(new URL("/login", req.nextUrl));
     }
 }

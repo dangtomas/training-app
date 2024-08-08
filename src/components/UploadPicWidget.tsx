@@ -1,31 +1,21 @@
 "use client";
 
+import { Dispatch, SetStateAction } from "react";
 import { getCookie } from "cookies-next";
 import { CldUploadWidget } from "next-cloudinary";
-import { useRouter } from "next/navigation";
-import { Dispatch, SetStateAction } from "react";
-
-async function updateProfilePic(url: string) {
-    await fetch(`api/users/${getCookie("id")}`, {
-        method: "PATCH",
-        headers: {
-            Authorization: `Bearer ${getCookie("token")}`,
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ profilePicSrc: url }),
-    });
-}
+import updateProfilePic from "@/utils/api/updateProfilePic";
 
 export default function UploadPicWidget(props: {
     setMessage: Dispatch<SetStateAction<string>>;
 }) {
-    const router = useRouter();
     return (
         <CldUploadWidget
             uploadPreset="vv63enoi"
             onSuccess={async (result) => {
-                await updateProfilePic((result.info as any).url);
-                props.setMessage("Úspěšně změněno 💪✅");
+                await updateProfilePic(
+                    getCookie("id")!,
+                    (result.info as any).url,
+                );
             }}
         >
             {({ open }) => {

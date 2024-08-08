@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function MenuTab(props: {
@@ -8,7 +7,6 @@ export default function MenuTab(props: {
     to: string;
 }) {
     const router = useRouter();
-
     return (
         <button
             onClick={() => {

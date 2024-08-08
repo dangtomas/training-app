@@ -1,5 +1,5 @@
-import updateAttendance from "@/utils/api/updateAttendance";
 import { Dispatch, SetStateAction } from "react";
+import updateAttendance from "@/utils/api/updateAttendance";
 
 export default function HostCard(props: {
     name: string;

@@ -1,16 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import Training from "@/types/Training";
 import Week from "@/types/Week";
+import TrainingCard from "@/components/TrainingCard/TrainingCard";
+import TrainingTable from "@/components/TrainingTable";
+import Loading from "@/components/Loading";
 import fetchWeeks from "../../utils/api/fetchWeeks";
 import fetchTrainings from "@/utils/api/fetchTrainings";
-import TrainingCard from "@/components/TrainingCard/TrainingCard";
-import Link from "next/link";
-import UpdateContext from "@/utils/updateContext";
-import Loading from "@/components/Loading";
 import { getDateInterval } from "@/utils/dateHelper";
-import TrainingTable from "@/components/TrainingTable";
+import UpdateContext from "@/utils/updateContext";
 
 export default function Trainings() {
     const [trainings, setTrainings] = useState<Training[]>([]);

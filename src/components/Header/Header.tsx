@@ -1,5 +1,5 @@
-import HomeButton from "./HomeButton";
 import Image from "next/image";
+import HomeButton from "./HomeButton";
 
 export default function Header() {
     return (

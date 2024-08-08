@@ -17,6 +17,5 @@ export default async function updateAttendance(
         push
             ? { $push: { attendance: userId } }
             : { $pull: { attendance: userId } },
-        { new: true },
     );
 }

@@ -1,9 +1,8 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
-import deleteCookies from "./deleteCookies";
-export const dynamic = "force-static";
+import { useRouter } from "next/navigation";
+import deleteCookies from "../../utils/deleteCookies";
 
 export default function Login() {
     const [username, setUsername] = useState("");

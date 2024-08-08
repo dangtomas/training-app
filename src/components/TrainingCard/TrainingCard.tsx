@@ -1,19 +1,19 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { getCookie } from "cookies-next";
-import { useEffect, useState } from "react";
 import Training from "@/types/Training";
 import User from "@/types/User";
+import PlayerCardSmall from "../PlayerCards/PlayerCardSmall";
+import HostCard from "../PlayerCards/HostCard";
+import DeleteTrainingModal from "./DeleteTrainingModal";
+import AddHostModal from "./AddHostModal";
 import { generateDateString } from "@/utils/dateHelper";
 import calculatePrice from "@/utils/calculatePrice";
 import fetchAttendance from "@/utils/api/fetchAttendance";
 import updateAttendance from "@/utils/api/updateAttendance";
 import fetchUser from "@/utils/api/fetchUser";
-import PlayerCardSmall from "../PlayerCards/PlayerCardSmall";
-import HostCard from "../PlayerCards/HostCard";
-import DeleteTrainingModal from "./DeleteTrainingModal";
-import AddHostModal from "./AddHostModal";
 
 export default function TrainingCard(training: Training) {
     const [attendanceList, setAttendanceList] = useState<User[]>([]);

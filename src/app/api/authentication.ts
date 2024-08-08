@@ -13,7 +13,10 @@ export async function isValidToken(token: string) {
     }
 }
 
-export async function APIauthenticate(authHeader: string | null) {
+export async function APIauthenticate(
+    authHeader: string | null,
+    method: string,
+) {
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
         return Response.json({ error: "Invalid token." }, { status: 401 });
     }
@@ -26,12 +29,12 @@ export async function APIauthenticate(authHeader: string | null) {
             new TextEncoder().encode(process.env.JWT_SECRET),
         );
 
-        const res = NextResponse.next();
-        if (payload.isAdmin) {
-            res.headers.set("isAdmin", "true");
+        if (method !== "GET" && !payload.isAdmin) {
+            return Response.json(
+                { error: "Unauthorized operation." },
+                { status: 401 },
+            );
         }
-
-        return res;
     } catch (err) {
         console.log(err);
         return Response.json({ error: "Invalid token." }, { status: 401 });

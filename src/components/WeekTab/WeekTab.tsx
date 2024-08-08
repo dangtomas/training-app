@@ -1,8 +1,8 @@
-import Week from "@/types/Week";
-import { getDateInterval } from "@/utils/dateHelper";
-import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import Week from "@/types/Week";
+import { getDateInterval } from "@/utils/dateHelper";
 import DeleteWeekModal from "./deleteWeekModal";
 
 export default function WeekTab(week: Week) {

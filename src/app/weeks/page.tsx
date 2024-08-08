@@ -1,10 +1,11 @@
 "use client";
-import WeekTab from "@/components/WeekTab/WeekTab";
+
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import WeekTab from "@/components/WeekTab/WeekTab";
+import Loading from "@/components/Loading";
 import fetchWeeks from "@/utils/api/fetchWeeks";
 import Week from "@/types/Week";
-import Loading from "@/components/Loading";
-import Link from "next/link";
 import UpdateContext from "@/utils/updateContext";
 
 export default function Weeks() {

@@ -1,8 +1,8 @@
-import TrainingType from "@/types/Training";
 import Training from "@/models/Training";
 import modifyTrainings from "@/utils/api/modifyTrainings";
 import CancelFormLink from "@/components/cancelFormLink";
 import { getTimezoneOffset } from "@/utils/dateHelper";
+import TrainingType from "@/types/Training";
 
 export default async function TrainingForm({
     searchParams,

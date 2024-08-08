@@ -1,7 +1,7 @@
-import CancelFormLink from "@/components/cancelFormLink";
 import Week from "@/models/Week";
-import WeekType from "@/types/Week";
+import CancelFormLink from "@/components/cancelFormLink";
 import modifyWeeks from "@/utils/api/modifyWeeks";
+import WeekType from "@/types/Week";
 
 export default async function WeekForm({
     searchParams,
