@@ -12,10 +12,15 @@ export default function UploadPicWidget(props: {
         <CldUploadWidget
             uploadPreset="vv63enoi"
             onSuccess={async (result) => {
-                await updateProfilePic(
-                    getCookie("id")!,
-                    (result.info as any).url,
-                );
+                try {
+                    await updateProfilePic(
+                        getCookie("id")!,
+                        (result.info as any).url,
+                    );
+                    props.setMessage("Úspěšně změněno 💪✅");
+                } catch {
+                    props.setMessage("Někde došlo k chybě ❌🙁");
+                }
             }}
         >
             {({ open }) => {
