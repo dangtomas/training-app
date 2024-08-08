@@ -109,7 +109,9 @@ export default function TrainingTable(props: { trainings: Training[] }) {
                                         <td
                                             key={t._id + m._id}
                                             className={`${includes ? "bg-green-300" : "bg-red-400"} border border-white`}
-                                        ></td>
+                                        >
+                                            {includes ? "1" : ""}
+                                        </td>
                                     );
                                 })}
                                 <td className="border border-gray-300">
