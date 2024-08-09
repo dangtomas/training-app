@@ -3,7 +3,7 @@ import Training from "@/types/Training";
 type TrainingWithoutId = Omit<Training, "_id">;
 
 export function createTrainingWeek(from: Date, type: string) {
-    if (from.getDay() !== 1) {
+    if (from.getUTCDay() !== 0) {
         throw new Error("Week must start with Monday.");
     }
 
