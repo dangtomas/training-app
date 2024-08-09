@@ -1,4 +1,5 @@
 import Training from "@/types/Training";
+import { getTimezoneOffset } from "./dateHelper";
 
 type TrainingWithoutId = Omit<Training, "_id">;
 
@@ -8,6 +9,7 @@ export function createTrainingWeek(from: Date, type: string) {
     }
 
     const date = new Date(from.getTime());
+    date.setHours(date.getHours() + 24);
     const trainings: TrainingWithoutId[] = [];
 
     type === "standard"
@@ -18,6 +20,7 @@ export function createTrainingWeek(from: Date, type: string) {
 }
 
 function addNormalWeekTrainings(trainings: TrainingWithoutId[], date: Date) {
+    const offsetHours = getTimezoneOffset("Europe/Prague") / 60;
     const defaults = {
         activity: "badminton",
         duration: 90,
@@ -29,41 +32,46 @@ function addNormalWeekTrainings(trainings: TrainingWithoutId[], date: Date) {
     };
 
     //monday
-    date.setHours(7, 0, 0, 0);
+    date.setUTCHours(7 - offsetHours, 0, 0, 0);
     trainings.push({
         ...defaults,
         date: new Date(date.getTime()),
         courtPrice: 210,
     });
 
-    date.setHours(15, 30);
+    date.setUTCHours(15 - offsetHours, 30);
     trainings.push({ ...defaults, date: new Date(date.getTime()) });
 
     //tuesday
-    date.setHours(date.getHours() + 25);
+    date.setUTCHours(date.getHours() + 25);
+    date.setUTCHours(16 - offsetHours, 30);
     trainings.push({ ...defaults, date: new Date(date.getTime()) });
 
     //wednesday
-    date.setHours(date.getHours() + 15, 0);
+    date.setUTCHours(date.getHours() + 15, 0);
+    date.setUTCHours(7 - offsetHours, 0);
     trainings.push({
         ...defaults,
         date: new Date(date.getTime()),
         courtPrice: 210,
     });
 
-    date.setHours(15, 0);
+    date.setUTCHours(15 - offsetHours, 0);
     trainings.push({ ...defaults, date: new Date(date.getTime()) });
 
     //thursday
-    date.setHours(date.getHours() + 25, 30);
+    date.setUTCHours(date.getHours() + 25, 30);
+    date.setUTCHours(16 - offsetHours, 30);
     trainings.push({ ...defaults, date: new Date(date.getTime()) });
 
     //friday
-    date.setHours(date.getHours() + 15, 0);
+    date.setUTCHours(date.getHours() + 15, 0);
+    date.setUTCHours(7 - offsetHours, 0);
     trainings.push({ ...defaults, date: new Date(date.getTime()) });
 }
 
 function addHolidayTrainingWeek(trainings: TrainingWithoutId[], date: Date) {
+    const offsetHours = getTimezoneOffset("Europe/Prague") / 60;
     const badmintonDefaults = {
         activity: "badminton",
         duration: 90,
@@ -85,36 +93,40 @@ function addHolidayTrainingWeek(trainings: TrainingWithoutId[], date: Date) {
     };
 
     //monday
-    date.setHours(7, 15, 0, 0);
+    date.setUTCHours(7 - offsetHours, 15, 0, 0);
     trainings.push({ ...athleticsDefaults, date: new Date(date.getTime()) });
-    date.setHours(9, 0);
+    date.setUTCHours(9 - offsetHours, 0);
     trainings.push({ ...badmintonDefaults, date: new Date(date.getTime()) });
-    date.setHours(16, 30);
+    date.setUTCHours(16 - offsetHours, 30);
     trainings.push({ ...badmintonDefaults, date: new Date(date.getTime()) });
 
     //tuesday
-    date.setHours(date.getHours() + 17, 0);
+    date.setUTCHours(date.getHours() + 17, 0);
+    date.setUTCHours(9 - offsetHours, 0);
     trainings.push({ ...badmintonDefaults, date: new Date(date.getTime()) });
-    date.setHours(16, 30);
+    date.setUTCHours(16 - offsetHours, 30);
     trainings.push({ ...badmintonDefaults, date: new Date(date.getTime()) });
 
     //wednesday
-    date.setHours(date.getHours() + 15, 15);
+    date.setUTCHours(date.getHours() + 15, 15);
+    date.setUTCHours(7 - offsetHours, 15);
     trainings.push({ ...athleticsDefaults, date: new Date(date.getTime()) });
-    date.setHours(9, 0);
+    date.setUTCHours(9 - offsetHours, 0);
     trainings.push({ ...badmintonDefaults, date: new Date(date.getTime()) });
-    date.setHours(16, 30);
+    date.setUTCHours(16 - offsetHours, 30);
     trainings.push({ ...badmintonDefaults, date: new Date(date.getTime()) });
 
     //thursday
-    date.setHours(date.getHours() + 17, 0);
+    date.setUTCHours(date.getHours() + 17, 0);
+    date.setUTCHours(9 - offsetHours, 0);
     trainings.push({ ...badmintonDefaults, date: new Date(date.getTime()) });
-    date.setHours(16, 30);
+    date.setUTCHours(16 - offsetHours, 30);
     trainings.push({ ...badmintonDefaults, date: new Date(date.getTime()) });
 
     //friday
-    date.setHours(date.getHours() + 15, 15);
+    date.setUTCHours(date.getHours() + 15, 15);
+    date.setUTCHours(7 - offsetHours, 15);
     trainings.push({ ...athleticsDefaults, date: new Date(date.getTime()) });
-    date.setHours(9, 0);
+    date.setUTCHours(9 - offsetHours, 0);
     trainings.push({ ...badmintonDefaults, date: new Date(date.getTime()) });
 }
