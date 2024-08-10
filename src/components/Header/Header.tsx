@@ -4,7 +4,7 @@ import HomeButton from "./HomeButton";
 export default function Header() {
     return (
         <>
-            <div className="fixed top-0 flex w-screen items-center justify-between bg-[#def4d7] p-3">
+            <div className="fixed top-0 z-10 flex w-screen items-center justify-between bg-[#def4d7] p-3">
                 <Image
                     src="/header-logo.png"
                     width={160}
