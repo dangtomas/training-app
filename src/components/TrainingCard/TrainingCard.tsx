@@ -76,17 +76,17 @@ export default function TrainingCard(training: Training) {
             <div className="box mt-3 items-start pb-2 pt-5">
                 <div className="flex w-full justify-between pb-1 pl-5 pr-4">
                     <h1 className="text-2xl font-bold">{training.activity}</h1>
-                    <div>
+                    <div className="relative bottom-1 flex flex-col items-start sm:flex-row">
                         <button
                             type="button"
                             onClick={() => setIsDeleteModal(true)}
-                            className="pr-2 text-red-500"
+                            className="px-1 text-red-500"
                         >
                             smazat
                         </button>
                         <Link
                             href={`/trainings/form?trainingId=${training._id}`}
-                            className="pr-2 text-sky-500"
+                            className="px-1 text-sky-500"
                         >
                             upravit
                         </Link>

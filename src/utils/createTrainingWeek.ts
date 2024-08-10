@@ -38,34 +38,32 @@ function addNormalWeekTrainings(trainings: TrainingWithoutId[], date: Date) {
         date: new Date(date.getTime()),
         courtPrice: 210,
     });
-
     date.setUTCHours(15 - offsetHours, 30);
     trainings.push({ ...defaults, date: new Date(date.getTime()) });
 
     //tuesday
-    date.setUTCHours(date.getHours() + 25);
+    date.setUTCHours(date.getHours() + 24);
     date.setUTCHours(16 - offsetHours, 30);
     trainings.push({ ...defaults, date: new Date(date.getTime()) });
 
     //wednesday
-    date.setUTCHours(date.getHours() + 15, 0);
+    date.setUTCHours(date.getHours() + 24);
     date.setUTCHours(7 - offsetHours, 0);
     trainings.push({
         ...defaults,
         date: new Date(date.getTime()),
         courtPrice: 210,
     });
-
     date.setUTCHours(15 - offsetHours, 0);
     trainings.push({ ...defaults, date: new Date(date.getTime()) });
 
     //thursday
-    date.setUTCHours(date.getHours() + 25, 30);
+    date.setUTCHours(date.getHours() + 24);
     date.setUTCHours(16 - offsetHours, 30);
     trainings.push({ ...defaults, date: new Date(date.getTime()) });
 
     //friday
-    date.setUTCHours(date.getHours() + 15, 0);
+    date.setUTCHours(date.getHours() + 24);
     date.setUTCHours(7 - offsetHours, 0);
     trainings.push({ ...defaults, date: new Date(date.getTime()) });
 }
@@ -101,14 +99,14 @@ function addHolidayTrainingWeek(trainings: TrainingWithoutId[], date: Date) {
     trainings.push({ ...badmintonDefaults, date: new Date(date.getTime()) });
 
     //tuesday
-    date.setUTCHours(date.getHours() + 17, 0);
+    date.setUTCHours(date.getHours() + 24);
     date.setUTCHours(9 - offsetHours, 0);
     trainings.push({ ...badmintonDefaults, date: new Date(date.getTime()) });
     date.setUTCHours(16 - offsetHours, 30);
     trainings.push({ ...badmintonDefaults, date: new Date(date.getTime()) });
 
     //wednesday
-    date.setUTCHours(date.getHours() + 15, 15);
+    date.setUTCHours(date.getHours() + 24);
     date.setUTCHours(7 - offsetHours, 15);
     trainings.push({ ...athleticsDefaults, date: new Date(date.getTime()) });
     date.setUTCHours(9 - offsetHours, 0);
@@ -117,14 +115,14 @@ function addHolidayTrainingWeek(trainings: TrainingWithoutId[], date: Date) {
     trainings.push({ ...badmintonDefaults, date: new Date(date.getTime()) });
 
     //thursday
-    date.setUTCHours(date.getHours() + 17, 0);
+    date.setUTCHours(date.getHours() + 24);
     date.setUTCHours(9 - offsetHours, 0);
     trainings.push({ ...badmintonDefaults, date: new Date(date.getTime()) });
     date.setUTCHours(16 - offsetHours, 30);
     trainings.push({ ...badmintonDefaults, date: new Date(date.getTime()) });
 
     //friday
-    date.setUTCHours(date.getHours() + 15, 15);
+    date.setUTCHours(date.getHours() + 24);
     date.setUTCHours(7 - offsetHours, 15);
     trainings.push({ ...athleticsDefaults, date: new Date(date.getTime()) });
     date.setUTCHours(9 - offsetHours, 0);
