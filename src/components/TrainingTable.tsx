@@ -124,21 +124,27 @@ export default function TrainingTable(props: { trainings: Training[] }) {
                                 <td className="border border-gray-300 font-bold">
                                     {props.trainings.reduce((acc, el) => {
                                         return el.attendance.includes(m._id)
-                                            ? acc + calculatePrice(el)
+                                            ? acc +
+                                                  calculatePrice(el) /
+                                                      el.attendance.length
                                             : acc;
                                     }, 0)}
                                 </td>
                                 <td className="border border-gray-300">
                                     {props.trainings.reduce((acc, el) => {
                                         return el.attendance.includes(m._id)
-                                            ? acc + calculateTrainerPrice(el)
+                                            ? acc +
+                                                  calculateTrainerPrice(el) /
+                                                      el.attendance.length
                                             : acc;
                                     }, 0)}
                                 </td>
                                 <td className="border border-gray-300">
                                     {props.trainings.reduce((acc, el) => {
                                         return el.attendance.includes(m._id)
-                                            ? acc + calculateCourtPrice(el)
+                                            ? acc +
+                                                  calculateCourtPrice(el) /
+                                                      el.attendance.length
                                             : acc;
                                     }, 0)}
                                 </td>
