@@ -12,6 +12,8 @@ export function middleware(req: NextRequest) {
         console.log(`Invalid token caught in middleware: ${token}`);
         return NextResponse.redirect(new URL("/login", req.nextUrl));
     }
+
+    console.log(`Token ok: ${token}`);
 }
 
 export const config = {
