@@ -78,7 +78,7 @@ export default function TrainingCard(training: Training) {
                     <h1 className="pt-3 text-2xl font-bold">
                         {training.activity}
                     </h1>
-                    <div className="flex flex-col items-start justify-start py-1 sm:flex-row">
+                    <div className="flex flex-col items-start justify-start pb-1 pt-3 sm:flex-row sm:pt-2">
                         <button
                             type="button"
                             onClick={() => setIsDeleteModal(true)}
