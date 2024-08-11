@@ -122,31 +122,39 @@ export default function TrainingTable(props: { trainings: Training[] }) {
                                     }, 0)}
                                 </td>
                                 <td className="border border-gray-300 font-bold">
-                                    {props.trainings.reduce((acc, el) => {
-                                        return el.attendance.includes(m._id)
-                                            ? acc +
-                                                  calculatePrice(el) /
-                                                      el.attendance.length
-                                            : acc;
-                                    }, 0)}
+                                    {Math.round(
+                                        props.trainings.reduce((acc, el) => {
+                                            return el.attendance.includes(m._id)
+                                                ? acc +
+                                                      calculatePrice(el) /
+                                                          el.attendance.length
+                                                : acc;
+                                        }, 0) * 100,
+                                    ) / 100}
                                 </td>
                                 <td className="border border-gray-300">
-                                    {props.trainings.reduce((acc, el) => {
-                                        return el.attendance.includes(m._id)
-                                            ? acc +
-                                                  calculateTrainerPrice(el) /
-                                                      el.attendance.length
-                                            : acc;
-                                    }, 0)}
+                                    {Math.round(
+                                        props.trainings.reduce((acc, el) => {
+                                            return el.attendance.includes(m._id)
+                                                ? acc +
+                                                      calculateTrainerPrice(
+                                                          el,
+                                                      ) /
+                                                          el.attendance.length
+                                                : acc;
+                                        }, 0) * 100,
+                                    ) / 100}
                                 </td>
                                 <td className="border border-gray-300">
-                                    {props.trainings.reduce((acc, el) => {
-                                        return el.attendance.includes(m._id)
-                                            ? acc +
-                                                  calculateCourtPrice(el) /
-                                                      el.attendance.length
-                                            : acc;
-                                    }, 0)}
+                                    {Math.round(
+                                        props.trainings.reduce((acc, el) => {
+                                            return el.attendance.includes(m._id)
+                                                ? acc +
+                                                      calculateCourtPrice(el) /
+                                                          el.attendance.length
+                                                : acc;
+                                        }, 0) * 100,
+                                    ) / 100}
                                 </td>
                             </tr>
                         );
@@ -255,13 +263,16 @@ export default function TrainingTable(props: { trainings: Training[] }) {
                             return (
                                 <td
                                     key={t._id + "pricePer"}
-                                    className="border border-white"
+                                    className="border border-white font-bold"
                                 >
                                     {t.attendance.length === 0
                                         ? 0
-                                        : (calculateTrainerPrice(t) +
-                                              calculateCourtPrice(t)) /
-                                          t.attendance.length}
+                                        : Math.round(
+                                              ((calculateTrainerPrice(t) +
+                                                  calculateCourtPrice(t)) /
+                                                  t.attendance.length) *
+                                                  100,
+                                          ) / 100}
                                 </td>
                             );
                         })}
@@ -282,8 +293,11 @@ export default function TrainingTable(props: { trainings: Training[] }) {
                                 >
                                     {t.attendance.length === 0
                                         ? 0
-                                        : calculateCourtPrice(t) /
-                                          t.attendance.length}
+                                        : Math.round(
+                                              (calculateCourtPrice(t) /
+                                                  t.attendance.length) *
+                                                  100,
+                                          ) / 100}
                                 </td>
                             );
                         })}
@@ -304,8 +318,11 @@ export default function TrainingTable(props: { trainings: Training[] }) {
                                 >
                                     {t.attendance.length === 0
                                         ? 0
-                                        : calculateTrainerPrice(t) /
-                                          t.attendance.length}
+                                        : Math.round(
+                                              (calculateTrainerPrice(t) /
+                                                  t.attendance.length) *
+                                                  100,
+                                          ) / 100}
                                 </td>
                             );
                         })}
