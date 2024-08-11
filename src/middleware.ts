@@ -9,6 +9,7 @@ export function middleware(req: NextRequest) {
     if (path.startsWith("/api")) {
         return APIauthenticate(headers().get("Authorization"), req.method);
     } else if (!token || !isValidToken(token)) {
+        console.log(`Invalid token caught in middleware: ${token}`);
         return NextResponse.redirect(new URL("/login", req.nextUrl));
     }
 }

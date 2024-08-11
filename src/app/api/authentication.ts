@@ -1,5 +1,4 @@
 import * as jose from "jose";
-import { NextResponse } from "next/server";
 
 export async function isValidToken(token: string) {
     try {
