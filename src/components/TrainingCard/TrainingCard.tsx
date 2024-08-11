@@ -105,7 +105,9 @@ export default function TrainingCard(training: Training) {
                     Účast: {attendanceList.length} | Na hráče:{" "}
                     {attendanceList.length === 0
                         ? 0
-                        : calculatePrice(training) / attendanceList.length}
+                        : Math.round(
+                              calculatePrice(training) / attendanceList.length,
+                          )}
                     ,-
                 </h3>
                 <p className="px-5 py-2">
