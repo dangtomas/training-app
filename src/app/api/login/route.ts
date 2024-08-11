@@ -20,7 +20,11 @@ export async function POST(req: Request) {
         { token, id: user._id },
         { status: 200 },
     );
-    response.cookies.set("token", token);
-    response.cookies.set("id", user._id);
+    response.cookies.set("token", token, {
+        expires: new Date(Date.now() + 24 * 60 * 60 * 1000 * 30),
+    });
+    response.cookies.set("id", user._id, {
+        expires: new Date(Date.now() + 24 * 60 * 60 * 1000 * 30),
+    });
     return response;
 }
