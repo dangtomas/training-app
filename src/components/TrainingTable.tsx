@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Training from "@/types/Training";
 import User from "@/types/User";
-import fetchMembersWithHosts from "@/utils/api/fetchMembersWithHosts";
+import fetchMembers from "@/utils/api/fetchMembers";
 import { generateDateStringTable } from "@/utils/dateHelper";
 import calculatePrice, {
     calculateCourtPrice,
@@ -12,7 +12,7 @@ export default function TrainingTable(props: { trainings: Training[] }) {
     const [members, setMembers] = useState<User[]>([]);
 
     useEffect(() => {
-        fetchMembersWithHosts(props.trainings).then((result) => {
+        fetchMembers(props.trainings, true).then((result) => {
             setMembers(result);
         });
     }, []);

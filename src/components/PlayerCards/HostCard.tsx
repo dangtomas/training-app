@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import updateAttendance from "@/utils/api/updateAttendance";
+import editAttendance from "@/utils/api/editAttendance";
 
 export default function HostCard(props: {
     name: string;
@@ -15,7 +15,7 @@ export default function HostCard(props: {
                 <button
                     className="pl-2"
                     onClick={async () => {
-                        await updateAttendance(
+                        await editAttendance(
                             props.hostId,
                             props.trainingId,
                             false,

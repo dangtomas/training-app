@@ -14,6 +14,7 @@ import calculatePrice from "@/utils/calculatePrice";
 import fetchAttendance from "@/utils/api/fetchAttendance";
 import updateAttendance from "@/utils/api/updateAttendance";
 import fetchUser from "@/utils/api/fetchUser";
+import EditAttendanceModal from "./EditAttendanceModal";
 
 export default function TrainingCard(training: Training) {
     const [attendanceList, setAttendanceList] = useState<User[]>([]);
@@ -24,6 +25,8 @@ export default function TrainingCard(training: Training) {
     const [update, setUpdate] = useState(false);
     const [isDeleteModal, setIsDeleteModal] = useState(false);
     const [isAddHostModal, setIsAddHostModal] = useState(false);
+    const [isEditAttendanceModal, setIsEditAttendanceModal] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         fetchAttendance(training._id).then(async (result) => {
@@ -33,6 +36,7 @@ export default function TrainingCard(training: Training) {
             );
             const userAttendance = await Promise.all(userAtendancePromises);
             setAttendanceList(userAttendance);
+            setLoading(false);
         });
     }, [update]);
 
@@ -54,7 +58,9 @@ export default function TrainingCard(training: Training) {
         setUpdate((a) => !a);
     }
 
-    return (
+    return loading ? (
+        <div className="box mt-3 py-[92px] text-2xl">Načítání...</div>
+    ) : (
         <>
             {isDeleteModal && (
                 <DeleteTrainingModal
@@ -69,6 +75,14 @@ export default function TrainingCard(training: Training) {
                 <AddHostModal
                     trainingId={training._id}
                     setIsAddHostModal={setIsAddHostModal}
+                    setUpdate={setUpdate}
+                />
+            )}
+
+            {isEditAttendanceModal && (
+                <EditAttendanceModal
+                    trainingId={training._id}
+                    setIsEditAttendanceModal={setIsEditAttendanceModal}
                     setUpdate={setUpdate}
                 />
             )}
@@ -172,12 +186,20 @@ export default function TrainingCard(training: Training) {
                                 );
                             })
                         )}
-                        <button
-                            className="basis-full text-sm text-sky-400"
-                            onClick={() => setIsAddHostModal(true)}
-                        >
-                            Přidat hosta
-                        </button>
+                        <div className="flex w-full justify-center">
+                            <button
+                                className="text-sm text-sky-400"
+                                onClick={() => setIsAddHostModal(true)}
+                            >
+                                Přidat hosta
+                            </button>
+                            <button
+                                className="ml-4 text-sm text-sky-400"
+                                onClick={() => setIsEditAttendanceModal(true)}
+                            >
+                                Upravit docházku
+                            </button>
+                        </div>
                     </div>
                 )}
             </div>

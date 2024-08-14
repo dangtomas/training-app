@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import updateAttendance from "@/utils/api/updateAttendance";
+import editAttendance from "@/utils/api/editAttendance";
 
 export default function AddHostModal(props: {
     trainingId: string;
@@ -12,7 +12,7 @@ export default function AddHostModal(props: {
                 <form
                     className="flex flex-col items-center"
                     action={async (formData: FormData) => {
-                        await updateAttendance(
+                        await editAttendance(
                             `HOST-${formData.get("hostName")}`,
                             props.trainingId,
                             true,

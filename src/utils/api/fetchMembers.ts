@@ -5,7 +5,10 @@ import fetchUser from "./fetchUser";
 import Training from "@/types/Training";
 import UserType from "@/types/User";
 
-export default async function fetchMembersWithHosts(trainings: Training[]) {
+export default async function fetchMembers(
+    trainings: Training[],
+    hosts: boolean,
+) {
     let users: UserType[] = await User.find({}).sort("name");
     users = users.filter((u) => {
         return (
@@ -14,7 +17,9 @@ export default async function fetchMembersWithHosts(trainings: Training[]) {
             u._id.toString() !== "66b3e5534bbc76f3225afb05"
         );
     });
-    await addHosts(trainings, users);
+    if (hosts) {
+        await addHosts(trainings, users);
+    }
     return JSON.parse(JSON.stringify(users));
 }
 
