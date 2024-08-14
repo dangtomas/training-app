@@ -3,7 +3,7 @@ import User from "@/types/User";
 import fetchMembers from "@/utils/api/fetchMembers";
 import editAttendance from "@/utils/api/editAttendance";
 
-export default function DeleteTrainingModal(props: {
+export default function EditAttendanceModal(props: {
     trainingId: string;
     setUpdate: Dispatch<SetStateAction<boolean>>;
     setIsEditAttendanceModal: Dispatch<SetStateAction<boolean>>;
