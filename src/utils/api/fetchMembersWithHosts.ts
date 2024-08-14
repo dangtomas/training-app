@@ -3,9 +3,10 @@
 import User from "@/models/User";
 import fetchUser from "./fetchUser";
 import Training from "@/types/Training";
+import UserType from "@/types/User";
 
 export default async function fetchMembersWithHosts(trainings: Training[]) {
-    let users = await User.find({}).sort("name");
+    let users: UserType[] = await User.find({}).sort("name");
     users = users.filter((u) => {
         return (
             u._id.toString() !== "669e2e4da78779b9287aaafd" &&
@@ -17,12 +18,12 @@ export default async function fetchMembersWithHosts(trainings: Training[]) {
     return JSON.parse(JSON.stringify(users));
 }
 
-async function addHosts(trainings: Training[], users: any) {
+async function addHosts(trainings: Training[], users: UserType[]) {
     trainings.forEach((t) =>
         t.attendance.forEach(async (id) => {
             if (id.startsWith("HOST")) {
                 const user = await fetchUser(id);
-                if (!users.some((u: { _id: string }) => u._id === user._id)) {
+                if (!users.some((u) => u._id === user._id)) {
                     users.push(user);
                 }
             }
