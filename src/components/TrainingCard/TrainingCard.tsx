@@ -27,6 +27,7 @@ export default function TrainingCard(training: Training) {
     const [isAddHostModal, setIsAddHostModal] = useState(false);
     const [isEditAttendanceModal, setIsEditAttendanceModal] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [changing, setChanging] = useState(false);
 
     useEffect(() => {
         fetchAttendance(training._id).then(async (result) => {
@@ -40,25 +41,19 @@ export default function TrainingCard(training: Training) {
         });
     }, [update]);
 
-    async function handleYes() {
-        if (isAttended) {
+    async function handleChange(clickedYes: boolean) {
+        if ((clickedYes && isAttended) || (!clickedYes && !isAttended)) {
             return;
         }
+        setChanging(true);
+        setLoading(true);
         const userId = getCookie("id")!;
-        await updateAttendance(userId, training._id, true);
+        await updateAttendance(userId, training._id, clickedYes);
         setUpdate((a) => !a);
+        setChanging(false);
     }
 
-    async function handleNo() {
-        if (!isAttended) {
-            return;
-        }
-        const userId = getCookie("id")!;
-        await updateAttendance(userId, training._id, false);
-        setUpdate((a) => !a);
-    }
-
-    return loading ? (
+    return loading || changing ? (
         <div className="box mt-3 py-[92px] text-2xl">Načítání...</div>
     ) : (
         <>
@@ -141,13 +136,17 @@ export default function TrainingCard(training: Training) {
                     </button>
                     <div>
                         <button
-                            onClick={handleYes}
+                            onClick={() => {
+                                handleChange(true);
+                            }}
                             className={`w-16 rounded-sm border-2 border-green-500 ${isAttended ? "bg-green-500 text-white" : "text-green-500"}`}
                         >
                             Ano
                         </button>
                         <button
-                            onClick={handleNo}
+                            onClick={() => {
+                                handleChange(false);
+                            }}
                             className={`ml-2 w-16 rounded-sm border-2 border-red-500 ${isAttended ? "text-red-500" : "bg-red-500 text-white"}`}
                         >
                             Ne

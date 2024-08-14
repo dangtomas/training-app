@@ -13,7 +13,6 @@ export default function EditAttendanceModal(props: {
     useEffect(() => {
         fetchMembers([], true).then((result) => {
             setMembers(result);
-            console.log(result);
         });
     }, []);
 
