@@ -22,7 +22,9 @@ async function addHosts(trainings: Training[], users: any) {
         t.attendance.forEach(async (id) => {
             if (id.startsWith("HOST")) {
                 const user = await fetchUser(id);
-                users.push(user);
+                if (!users.some((u: { _id: string }) => u._id === user._id)) {
+                    users.push(user);
+                }
             }
         }),
     );
