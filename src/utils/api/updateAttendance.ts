@@ -15,7 +15,7 @@ export default async function updateAttendance(
     await Training.findByIdAndUpdate(
         trainingId,
         push
-            ? { $push: { attendance: userId } }
+            ? { $addToSet: { attendance: userId } }
             : { $pull: { attendance: userId } },
     );
 }
