@@ -33,12 +33,12 @@ export default function EditAttendanceModal(props: {
                 <div className="box mt-3 py-[160px] text-2xl">Načítání...</div>
             ) : (
                 <div className="box flex w-[95vw] max-w-[600px] flex-col items-center py-2">
-                    <h3 className="text-xl font-bold">Upravit docházku</h3>
+                    <h3 className="py-2 text-xl font-bold">Upravit docházku</h3>
                     {members.map((m) => {
                         return (
                             <div
                                 key={m._id}
-                                className="flex w-[97%] justify-between border-b border-gray-400 py-1"
+                                className="flex w-[95%] justify-between border-b border-gray-400 py-1"
                             >
                                 {m.name}
                                 <div>
