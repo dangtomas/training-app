@@ -69,7 +69,11 @@ export default function Dashboard() {
                     );
                 })}
             </div>
-            <Link href="/login" className="m-auto pt-5 text-red-500">
+            <Link
+                href="/login"
+                className="m-auto pt-5 text-red-500"
+                prefetch={true}
+            >
                 Odhlásit se
             </Link>
         </div>
