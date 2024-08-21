@@ -2,7 +2,7 @@
 
 import Training from "@/models/Training";
 
-export default async function fetchAttendance(id: string) {
+export default async function fetchTraining(id: string) {
     const training = await Training.findById(id);
-    return training.attendance;
+    return JSON.parse(JSON.stringify(training));
 }

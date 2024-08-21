@@ -10,20 +10,20 @@ import DeleteTrainingModal from "./DeleteTrainingModal";
 import AddHostModal from "./AddHostModal";
 import { generateDateString } from "@/utils/dateHelper";
 import calculatePrice from "@/utils/calculatePrice";
-import fetchAttendance from "@/utils/api/fetchAttendance";
+import fetchTraining from "@/utils/api/fetchTraining";
 import updateAttendance from "@/utils/api/updateAttendance";
 import fetchUser from "@/utils/api/fetchUser";
 import EditAttendanceModal from "./EditAttendanceModal";
 import TrainingFormModal from "../TrainingFormModal";
 
-export default function TrainingCard(training: Training) {
-    const [trainingState, setTrainingState] = useState<Training>({
-        ...training,
+export default function TrainingCard(trainingProp: Training) {
+    const [training, setTraining] = useState<Training>({
+        ...trainingProp,
     });
     const [attendanceList, setAttendanceList] = useState<User[]>([]);
     const [showAttendance, setShowAttendance] = useState(false);
     const [isAttended, setIsAttended] = useState(
-        training.attendance.includes(getCookie("id")!),
+        trainingProp.attendance.includes(getCookie("id")!),
     );
     const [update, setUpdate] = useState(false);
     const [isEditTrainingForm, setIsEditTrainingForm] = useState(false);
@@ -34,13 +34,15 @@ export default function TrainingCard(training: Training) {
     const [changing, setChanging] = useState(false);
 
     useEffect(() => {
-        fetchAttendance(training._id).then(async (result) => {
-            setIsAttended(result.includes(getCookie("id")!));
-            const userAtendancePromises = result.map((id: string) =>
+        setLoading(true);
+        fetchTraining(trainingProp._id).then(async (result: Training) => {
+            setIsAttended(result.attendance.includes(getCookie("id")!));
+            const userAtendancePromises = result.attendance.map((id: string) =>
                 fetchUser(id),
             );
             const userAttendance = await Promise.all(userAtendancePromises);
             setAttendanceList(userAttendance);
+            setTraining({ ...result, date: new Date(result.date) });
             setLoading(false);
         });
     }, [update]);
