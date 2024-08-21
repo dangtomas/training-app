@@ -1,7 +1,7 @@
 import Training from "@/models/Training";
 import modifyTrainings from "@/utils/api/modifyTrainings";
 import CancelFormLink from "@/components/cancelFormLink";
-import { getTimezoneOffset } from "@/utils/dateHelper";
+import { generateDateString, getTimezoneOffset } from "@/utils/dateHelper";
 import TrainingType from "@/types/Training";
 
 export default async function TrainingForm({
@@ -34,6 +34,11 @@ export default async function TrainingForm({
             <h2 className="w-full text-center text-2xl font-bold">
                 {training ? "Upravit" : "Vytvořit"} trénink
             </h2>
+            <h3 className="w-full p-1 text-center text-xl font-bold">
+                {training
+                    ? generateDateString(training.date, training.duration)
+                    : ""}
+            </h3>
 
             <input
                 className="hidden"
