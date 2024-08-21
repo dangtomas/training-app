@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { getCookie } from "cookies-next";
 import Training from "@/types/Training";
 import User from "@/types/User";
@@ -15,14 +14,19 @@ import fetchAttendance from "@/utils/api/fetchAttendance";
 import updateAttendance from "@/utils/api/updateAttendance";
 import fetchUser from "@/utils/api/fetchUser";
 import EditAttendanceModal from "./EditAttendanceModal";
+import TrainingFormModal from "../TrainingFormModal";
 
 export default function TrainingCard(training: Training) {
+    const [trainingState, setTrainingState] = useState<Training>({
+        ...training,
+    });
     const [attendanceList, setAttendanceList] = useState<User[]>([]);
     const [showAttendance, setShowAttendance] = useState(false);
     const [isAttended, setIsAttended] = useState(
         training.attendance.includes(getCookie("id")!),
     );
     const [update, setUpdate] = useState(false);
+    const [isEditTrainingForm, setIsEditTrainingForm] = useState(false);
     const [isDeleteModal, setIsDeleteModal] = useState(false);
     const [isAddHostModal, setIsAddHostModal] = useState(false);
     const [isEditAttendanceModal, setIsEditAttendanceModal] = useState(false);
@@ -57,6 +61,13 @@ export default function TrainingCard(training: Training) {
         <div className="box mt-3 py-[92px] text-2xl">Načítání...</div>
     ) : (
         <>
+            {isEditTrainingForm && (
+                <TrainingFormModal
+                    training={training}
+                    setUpdate={setUpdate}
+                    setIsTrainingFormModal={setIsEditTrainingForm}
+                />
+            )}
             {isDeleteModal && (
                 <DeleteTrainingModal
                     date={training.date}
@@ -95,12 +106,12 @@ export default function TrainingCard(training: Training) {
                         >
                             smazat
                         </button>
-                        <Link
-                            href={`/trainings/form?trainingId=${training._id}`}
+                        <button
+                            onClick={() => setIsEditTrainingForm(true)}
                             className="px-1 text-sky-500"
                         >
                             upravit
-                        </Link>
+                        </button>
                     </div>
                 </div>
                 <h2 className="pb-1 pl-5 text-xl font-bold">

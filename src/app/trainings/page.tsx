@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import Training from "@/types/Training";
 import Week from "@/types/Week";
 import TrainingCard from "@/components/TrainingCard/TrainingCard";
 import TrainingTable from "@/components/TrainingTable";
+import TrainingFormModal from "@/components/TrainingFormModal";
 import Loading from "@/components/Loading";
 import fetchWeeks from "../../utils/api/fetchWeeks";
 import fetchTrainings from "@/utils/api/fetchTrainings";
@@ -19,6 +19,7 @@ export default function Trainings() {
     const [currentWeek, setCurrentWeek] = useState<Week>();
     const [update, setUpdate] = useState(false);
     const [showTables, setShowTables] = useState<boolean>();
+    const [isCreateTrainingForm, setIsCreateTrainingForm] = useState(false);
 
     useEffect(() => {
         setShowTables(localStorage.getItem("tables") === "true");
@@ -58,6 +59,13 @@ export default function Trainings() {
 
     return (
         <UpdateContext.Provider value={updatePage}>
+            {isCreateTrainingForm && (
+                <TrainingFormModal
+                    training={null}
+                    setUpdate={setUpdate}
+                    setIsTrainingFormModal={setIsCreateTrainingForm}
+                />
+            )}
             {loading ? (
                 <Loading />
             ) : (
@@ -124,13 +132,13 @@ export default function Trainings() {
                         <TrainingTable trainings={trainings} />
                     ) : (
                         <>
-                            <Link
-                                href="/trainings/form"
+                            <button
+                                onClick={() => setIsCreateTrainingForm(true)}
                                 className="mt-2 w-[95vw] max-w-[600px] rounded-md border border-gray-400 bg-white py-1 text-center text-lg"
                             >
                                 <i className="fa-solid fa-plus"></i> Vytvořit
                                 trénink
-                            </Link>
+                            </button>
                             {trainings &&
                                 trainings.map((training) => {
                                     return (
