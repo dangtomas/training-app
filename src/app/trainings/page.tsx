@@ -23,7 +23,6 @@ export default function Trainings() {
 
     useEffect(() => {
         setShowTables(localStorage.getItem("tables") === "true");
-        console.log(localStorage.getItem("tables") === "true");
     }, []);
 
     useEffect(() => {

@@ -137,9 +137,12 @@ export default function TrainingTable(props: { trainings: Training[] }) {
                                         props.trainings.reduce((acc, el) => {
                                             return el.attendance.includes(m._id)
                                                 ? acc +
-                                                      calculateTrainerPrice(
-                                                          el,
-                                                      ) /
+                                                      calculateTrainerPrice({
+                                                          ...el,
+                                                          date: new Date(
+                                                              el.date,
+                                                          ),
+                                                      }) /
                                                           el.attendance.length
                                                 : acc;
                                         }, 0) * 100,
@@ -207,7 +210,10 @@ export default function TrainingTable(props: { trainings: Training[] }) {
                                     key={t._id + "trainerPrice"}
                                     className="border border-white"
                                 >
-                                    {calculateTrainerPrice(t)}
+                                    {calculateTrainerPrice({
+                                        ...t,
+                                        date: new Date(t.date),
+                                    })}
                                 </td>
                             );
                         })}
@@ -245,8 +251,10 @@ export default function TrainingTable(props: { trainings: Training[] }) {
                                     key={t._id + "totalPrice"}
                                     className="border border-white"
                                 >
-                                    {calculateTrainerPrice(t) +
-                                        calculateCourtPrice(t)}
+                                    {calculateTrainerPrice({
+                                        ...t,
+                                        date: new Date(t.date),
+                                    }) + calculateCourtPrice(t)}
                                 </td>
                             );
                         })}
@@ -268,7 +276,10 @@ export default function TrainingTable(props: { trainings: Training[] }) {
                                     {t.attendance.length === 0
                                         ? 0
                                         : Math.round(
-                                              ((calculateTrainerPrice(t) +
+                                              ((calculateTrainerPrice({
+                                                  ...t,
+                                                  date: new Date(t.date),
+                                              }) +
                                                   calculateCourtPrice(t)) /
                                                   t.attendance.length) *
                                                   100,
@@ -319,7 +330,10 @@ export default function TrainingTable(props: { trainings: Training[] }) {
                                     {t.attendance.length === 0
                                         ? 0
                                         : Math.round(
-                                              (calculateTrainerPrice(t) /
+                                              (calculateTrainerPrice({
+                                                  ...t,
+                                                  date: new Date(t.date),
+                                              }) /
                                                   t.attendance.length) *
                                                   100,
                                           ) / 100}

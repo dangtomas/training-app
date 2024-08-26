@@ -9,9 +9,11 @@ export function calculateCourtPrice(training: Training) {
 }
 
 export function calculateTrainerPrice(training: Training) {
-    const trainerHourly = training.isTrainer ? 500 : 0;
-    if (!training.isTrainer) {
-        return 0;
-    }
+    const newPriceDate = new Date("2024-09-01T00:00:00.000Z");
+    const trainerHourly = training.isTrainer
+        ? training.date > newPriceDate
+            ? 600
+            : 500
+        : 0;
     return (training.duration / 60) * trainerHourly;
 }
