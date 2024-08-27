@@ -21,6 +21,8 @@ export default function Trainings() {
     const [showTables, setShowTables] = useState<boolean>();
     const [isCreateTrainingForm, setIsCreateTrainingForm] = useState(false);
 
+    const currentDate = new Date();
+
     useEffect(() => {
         setShowTables(localStorage.getItem("tables") === "true");
     }, []);
@@ -152,6 +154,7 @@ export default function Trainings() {
                                             courtPrice={training.courtPrice}
                                             info={training.info}
                                             attendance={training.attendance}
+                                            currentDate={currentDate}
                                         />
                                     );
                                 })}

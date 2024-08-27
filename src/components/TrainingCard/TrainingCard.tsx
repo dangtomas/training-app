@@ -16,7 +16,9 @@ import fetchUser from "@/utils/api/fetchUser";
 import EditAttendanceModal from "./EditAttendanceModal";
 import TrainingFormModal from "../TrainingFormModal";
 
-export default function TrainingCard(trainingProp: Training) {
+export default function TrainingCard(
+    trainingProp: Training & { currentDate: Date },
+) {
     const [training, setTraining] = useState<Training>({
         ...trainingProp,
     });
@@ -147,24 +149,30 @@ export default function TrainingCard(trainingProp: Training) {
                         )}
                         <span className="pl-1 underline">účast</span>
                     </button>
-                    <div>
-                        <button
-                            onClick={() => {
-                                handleChange(true);
-                            }}
-                            className={`w-16 rounded-sm border-2 border-green-500 ${isAttended ? "bg-green-500 text-white" : "text-green-500"}`}
-                        >
-                            Ano
-                        </button>
-                        <button
-                            onClick={() => {
-                                handleChange(false);
-                            }}
-                            className={`ml-2 w-16 rounded-sm border-2 border-red-500 ${isAttended ? "text-red-500" : "bg-red-500 text-white"}`}
-                        >
-                            Ne
-                        </button>
-                    </div>
+                    {trainingProp.date.getTime() -
+                        trainingProp.currentDate.getTime() >
+                    36 * 60 * 60 * 1000 ? (
+                        <div>
+                            <button
+                                onClick={() => {
+                                    handleChange(true);
+                                }}
+                                className={`w-16 rounded-sm border-2 border-green-500 ${isAttended ? "bg-green-500 text-white" : "text-green-500"}`}
+                            >
+                                Ano
+                            </button>
+                            <button
+                                onClick={() => {
+                                    handleChange(false);
+                                }}
+                                className={`ml-2 w-16 rounded-sm border-2 border-red-500 ${isAttended ? "text-red-500" : "bg-red-500 text-white"}`}
+                            >
+                                Ne
+                            </button>
+                        </div>
+                    ) : (
+                        <div>Přihlašování skončilo</div>
+                    )}
                 </div>
                 {showAttendance && (
                     <div className="flex w-full flex-col px-5 pt-4 sm:flex-row sm:flex-wrap">
