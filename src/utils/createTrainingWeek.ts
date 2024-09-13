@@ -65,7 +65,11 @@ function addNormalWeekTrainings(trainings: TrainingWithoutId[], date: Date) {
     //friday
     date.setUTCHours(date.getHours() + 24);
     date.setUTCHours(7 - offsetHours, 0);
-    trainings.push({ ...defaults, date: new Date(date.getTime()) });
+    trainings.push({
+        ...defaults,
+        date: new Date(date.getTime()),
+        courtPrice: 210,
+    });
 }
 
 function addHolidayTrainingWeek(trainings: TrainingWithoutId[], date: Date) {
