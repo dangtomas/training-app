@@ -126,7 +126,12 @@ export default function TrainingTable(props: { trainings: Training[] }) {
                                         props.trainings.reduce((acc, el) => {
                                             return el.attendance.includes(m._id)
                                                 ? acc +
-                                                      calculatePrice(el) /
+                                                      calculatePrice({
+                                                          ...el,
+                                                          date: new Date(
+                                                              el.date,
+                                                          ),
+                                                      }) /
                                                           el.attendance.length
                                                 : acc;
                                         }, 0) * 100,
