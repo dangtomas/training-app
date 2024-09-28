@@ -53,10 +53,17 @@ export default function TrainingCard(
         if ((clickedYes && isAttended) || (!clickedYes && !isAttended)) {
             return;
         }
+        const userId = getCookie("id")!;
+        const resultString = await updateAttendance(
+            userId,
+            training._id,
+            clickedYes,
+        );
+        if (resultString) {
+            alert(resultString);
+        }
         setChanging(true);
         setLoading(true);
-        const userId = getCookie("id")!;
-        await updateAttendance(userId, training._id, clickedYes);
         setUpdate((a) => !a);
         setChanging(false);
     }
