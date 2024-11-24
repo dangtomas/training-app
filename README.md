@@ -1,1 +1,1 @@
-# Training app rewritten in Next.js and Tailwind, and with more functionality added.
+App used by a local badminton training group in Brno for tracking attendance and payments.
