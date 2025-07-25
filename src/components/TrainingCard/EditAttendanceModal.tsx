@@ -32,45 +32,40 @@ export default function EditAttendanceModal(props: {
             {members.length === 0 ? (
                 <div className="box mt-3 py-[160px] text-2xl">Načítání...</div>
             ) : (
-                <div className="box flex w-[95vw] max-w-[600px] flex-col items-center py-2">
+                <div className="box flex h-[80vh] w-[95vw] max-w-[600px] flex-col items-center py-2">
                     <h3 className="py-2 text-xl font-bold">Upravit docházku</h3>
-                    {members.map((m) => {
-                        return (
+                    <div className="flex-1 w-full overflow-y-auto">
+                        {members.map((m) => (
                             <div
                                 key={m._id}
-                                className="flex w-[95%] justify-between border-b border-gray-400 py-1"
+                                className="flex w-[95%] justify-between border-b border-gray-400 py-1 mx-auto"
                             >
                                 {m.name}
                                 <div>
                                     <button
                                         className="text-sky-500"
-                                        onClick={() => {
-                                            handleEdit(m._id, true);
-                                        }}
+                                        onClick={() => handleEdit(m._id, true)}
                                     >
                                         Přidat
                                     </button>
                                     <button
                                         className="pl-2 text-red-500"
-                                        onClick={() => {
-                                            handleEdit(m._id, false);
-                                        }}
+                                        onClick={() => handleEdit(m._id, false)}
                                     >
                                         Odebrat
                                     </button>
                                 </div>
                             </div>
-                        );
-                    })}
-                    <button
-                        className="pt-2 text-lg text-sky-500"
-                        onClick={() => {
-                            props.setIsEditAttendanceModal(false);
-                        }}
-                    >
-                        Zrušit
-                    </button>
-                </div>
+                        ))}
+                    </div>
+    <button
+        className="pt-2 text-lg text-sky-500"
+        onClick={() => props.setIsEditAttendanceModal(false)}
+    >
+        Zrušit
+    </button>
+</div>
+
             )}
         </div>
     );
